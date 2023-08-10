@@ -1,17 +1,18 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.css";
-import ToastNotification, { type ToastProps } from "./common/Toast";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Login from "./pages/Login";
 
 function App(): JSX.Element {
-	const [toast, setToast] = useState<ToastProps>();
-
 	return (
-		<>
-			<ToastNotification toast={toast} setToast={setToast} />
-			<div className="text-lg text-indigo-700 text-center">
-				Hello Tailwind CSS
-			</div>
-		</>
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" index element={<Login />} />
+				<Route path="/about" element={<> About </>} />
+
+				{/* <Route path="/*" element={<Home />} /> */}
+			</Routes>
+		</BrowserRouter>
 	);
 }
 
