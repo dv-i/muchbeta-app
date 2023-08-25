@@ -21,7 +21,7 @@ export default function Example(): JSX.Element {
 						{/* Mobile menu button */}
 						<Disclosure.Button
 							onClick={handleOnClickBackButton}
-							className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+							className="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-100 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-teal-500"
 						>
 							<ArrowLeftIcon
 								className="block h-6 w-6"
@@ -40,25 +40,24 @@ export default function Example(): JSX.Element {
 							</NavLink>
 						</div>
 					</div>
-					<div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-						<button
+					<div className="absolute inset-y-0 gap-2 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+						<NavLink
+							to="/wallet"
 							type="button"
-							className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+							className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
 						>
-							<span className="absolute -inset-1.5" />
 							<span className="sr-only">View notifications</span>
 							<WalletIcon
 								className="h-6 w-6"
 								aria-hidden="true"
 							/>
-						</button>
+						</NavLink>
 
 						{/* Profile dropdown */}
 						<button
 							type="button"
-							className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+							className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
 						>
-							<span className="absolute -inset-1.5" />
 							<span className="sr-only">View notifications</span>
 							<UserCircleIcon
 								className="h-6 w-6"

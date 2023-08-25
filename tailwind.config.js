@@ -12,6 +12,8 @@ module.exports = {
 			colors: {
 				primary: "#0d9488",
 				secondary: "#ffffff",
+				muchbetaDark: "#439288",
+				muchbetaLight: "#9EF0E1",
 			},
 		},
 	},
