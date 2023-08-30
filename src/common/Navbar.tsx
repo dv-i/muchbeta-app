@@ -54,8 +54,8 @@ export default function Example(): JSX.Element {
 						</NavLink>
 
 						{/* Profile dropdown */}
-						<button
-							type="button"
+						<NavLink
+							to="/profile"
 							className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
 						>
 							<span className="sr-only">View notifications</span>
@@ -63,7 +63,7 @@ export default function Example(): JSX.Element {
 								className="h-6 w-6"
 								aria-hidden="true"
 							/>
-						</button>
+						</NavLink>
 					</div>
 				</div>
 			</div>
