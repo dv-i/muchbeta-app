@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import Wallet from "./pages/Wallet";
 import Profile from "./pages/Profile";
 import Reader from "./pages/Reader";
+import Writer from "./pages/Writer";
 
 function App(): JSX.Element {
 	return (
@@ -16,6 +17,7 @@ function App(): JSX.Element {
 				<Route path="/wallet" element={<Wallet />} />
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/reader" element={<Reader />} />
+				<Route path="/writer" element={<Writer />} />
 			</Routes>
 		</BrowserRouter>
 	);
