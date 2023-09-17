@@ -36,14 +36,14 @@ export function RoleSelection(): JSX.Element {
 					</p>
 					<div className="mt-10 flex items-center justify-center gap-x-6">
 						<NavLink
-							to="/home-reader"
+							to="/reader"
 							className="rounded-md bg-white px-3.5 py-2.5 text-sm font-semibold text-teal-600 shadow-sm hover:bg-teal-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
 						>
 							Reader
 						</NavLink>
 
 						<NavLink
-							to="/home-writer"
+							to="/writer"
 							className="rounded-md bg-white ml-5 px-3.5 py-2.5 text-sm font-semibold text-teal-600 shadow-sm hover:bg-teal-50 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
 						>
 							Writer
