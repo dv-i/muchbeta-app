@@ -293,7 +293,7 @@ export default function Example(): JSX.Element {
 												scope="col"
 											>
 												<span className="lg:pl-2">
-													Project
+													Past Projects
 												</span>
 											</th>
 
