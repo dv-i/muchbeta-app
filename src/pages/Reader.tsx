@@ -245,7 +245,7 @@ export default function Example(): JSX.Element {
 												scope="col"
 												className="px-0 py-3 font-bold text-lg w-full"
 											>
-												Reads
+												Matches
 											</th>
 											<th
 												scope="col"
