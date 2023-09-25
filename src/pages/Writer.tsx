@@ -1,6 +1,7 @@
 import { Fragment } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
+import { PlusCircleIcon } from "@heroicons/react/24/solid";
 import {
 	ChevronRightIcon,
 	EllipsisVerticalIcon,
@@ -104,6 +105,10 @@ export default function Example(): JSX.Element {
 									</h1>
 								</div>
 								<div className="flex items-center gap-x-4 sm:gap-x-6">
+									<div className="rounded-md flex flex-row align-middle justify-center self-center items-center gap-2 bg-white border-teal-600 border-2 cursor-pointer px-3 py-2 text-sm font-semibold text-teal-600 hover:text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">
+										<PlusCircleIcon className="h-4 w-4" />{" "}
+										Start a Project
+									</div>
 									<NavLink
 										to={"/reader"}
 										className="rounded-md flex flex-row align-middle justify-center self-center items-center gap-2 bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
