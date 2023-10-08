@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Navbar from "../common/Navbar";
 import { NavLink } from "react-router-dom";
 import { RadioGroup } from "@headlessui/react";
 
@@ -10,7 +9,6 @@ import ReactCardCarousel from "react-card-carousel";
 function Home(): JSX.Element {
 	return (
 		<>
-			<Navbar />
 			<RoleSelection />
 			<SponsorAD />
 			<PromotionSection />
