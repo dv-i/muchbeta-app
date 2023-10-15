@@ -8,7 +8,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { NavLink } from "react-router-dom";
 import { projects } from "../constants";
-import { ProjectModal } from "../components/ProjectModal";
+import { WriterProjectModal } from "../components/WriterProjectModal";
 
 const pinnedProjects = projects.filter((project) => project.pinned);
 
@@ -177,7 +177,7 @@ export default function Example(): JSX.Element {
 																		active
 																			? "bg-gray-100 text-gray-900"
 																			: "text-gray-700",
-																		"block px-4 py-2 text-sm"
+																		"block px-4 py-2 text-sm cursor-pointer"
 																	)}
 																>
 																	View
@@ -224,9 +224,12 @@ export default function Example(): JSX.Element {
 						>
 							{projects.map((project) => (
 								<li key={project.id}>
-									<a
-										href="#"
-										className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6"
+									<span
+										onClick={() => {
+											setCurrentProject(project.title);
+											setProjectModalIsOpen(true);
+										}}
+										className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6 cursor-pointer"
 									>
 										<span className="flex items-center space-x-3 truncate">
 											<span
@@ -247,7 +250,7 @@ export default function Example(): JSX.Element {
 											className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
 											aria-hidden="true"
 										/>
-									</a>
+									</span>
 								</li>
 							))}
 						</ul>
@@ -282,7 +285,16 @@ export default function Example(): JSX.Element {
 								</thead>
 								<tbody className="divide-y divide-gray-100 bg-white">
 									{projects.map((project) => (
-										<tr key={project.id}>
+										<tr
+											key={project.id}
+											onClick={() => {
+												setCurrentProject(
+													project.title
+												);
+												setProjectModalIsOpen(true);
+											}}
+											className="cursor-pointer"
+										>
 											<td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
 												<div className="flex items-center space-x-3 lg:pl-2">
 													<div
@@ -292,10 +304,7 @@ export default function Example(): JSX.Element {
 														)}
 														aria-hidden="true"
 													/>
-													<a
-														href="#"
-														className="truncate hover:text-gray-600"
-													>
+													<span className="truncate hover:text-gray-600">
 														<span>
 															{project.title}{" "}
 															<span className="font-normal text-gray-500">
@@ -305,7 +314,7 @@ export default function Example(): JSX.Element {
 																}
 															</span>
 														</span>
-													</a>
+													</span>
 												</div>
 											</td>
 											<td className="hidden whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
@@ -330,7 +339,7 @@ export default function Example(): JSX.Element {
 			</div>
 
 			{projectModaIsOpen && (
-				<ProjectModal
+				<WriterProjectModal
 					currentProject={currentProject}
 					isOpen={projectModaIsOpen}
 					setIsOpen={setProjectModalIsOpen}

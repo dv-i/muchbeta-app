@@ -5,7 +5,7 @@ import { projects } from "../constants";
 import type { Project } from "../interfaces";
 
 const PRICE_PER_WORD = 0.823;
-interface ProjectModalProps {
+interface WriterProjectModalProps {
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 	currentProject?: string;
@@ -15,11 +15,11 @@ const getProjectDetails = (projectTitle: string | undefined): Project => {
 		(project) => project.title === projectTitle
 	) as Project;
 };
-export const ProjectModal = ({
+export const WriterProjectModal = ({
 	isOpen,
 	setIsOpen,
 	currentProject,
-}: ProjectModalProps): JSX.Element => {
+}: WriterProjectModalProps): JSX.Element => {
 	const [wordCount, setWordCount] = useState<number>(
 		getProjectDetails(currentProject)?.wordCount || 0
 	);
@@ -30,7 +30,7 @@ export const ProjectModal = ({
 		getProjectDetails(currentProject)?.chapters || []
 	);
 
-	const [projectTitle, setProjectTitle] = useState<string>(
+	const [projectTitle] = useState<string>(
 		getProjectDetails(currentProject)?.title || ""
 	);
 
