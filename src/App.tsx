@@ -7,9 +7,7 @@ import Wallet from "./pages/Wallet";
 import Profile from "./pages/Profile";
 import Reader from "./pages/Reader";
 import Writer from "./pages/Writer";
-import NewProject from "./pages/NewProject";
-import Navbar from "./common/Navbar";
-import CurrentProject from "./pages/CurrentProject";
+import Navbar from "./components/common/Navbar";
 
 function App(): JSX.Element {
 	return (
@@ -22,8 +20,6 @@ function App(): JSX.Element {
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/reader" element={<Reader />} />
 				<Route path="/writer" element={<Writer />} />
-				<Route path="/writer/new-project" element={<NewProject />} />
-				<Route path="/writer/project/*" element={<CurrentProject />} />
 			</Routes>
 		</BrowserRouter>
 	);

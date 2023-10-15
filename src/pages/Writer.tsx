@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { Menu, Transition } from "@headlessui/react";
 import { BookOpenIcon } from "@heroicons/react/24/outline";
 import { PlusCircleIcon } from "@heroicons/react/24/solid";
@@ -8,6 +8,7 @@ import {
 } from "@heroicons/react/20/solid";
 import { NavLink } from "react-router-dom";
 import { projects } from "../constants";
+import { ProjectModal } from "../components/ProjectModal";
 
 const pinnedProjects = projects.filter((project) => project.pinned);
 
@@ -15,11 +16,15 @@ function classNames(...classes: string[]): string {
 	return classes.filter(Boolean).join(" ");
 }
 
-const getProjectUrl = (projectTitle: string): string => {
-	return `/writer/project/${projectTitle.toLowerCase().replaceAll(" ", "-")}`;
-};
-
 export default function Example(): JSX.Element {
+	const [projectModaIsOpen, setProjectModalIsOpen] = useState<boolean>(false);
+	const [currentProject, setCurrentProject] = useState<string | undefined>();
+
+	useEffect(() => {
+		if (!projectModaIsOpen) {
+			setCurrentProject(undefined);
+		}
+	}, [projectModaIsOpen]);
 	return (
 		<div className="min-h-full">
 			<div className="mx-auto max-w-7xl flex flex-col ">
@@ -53,17 +58,15 @@ export default function Example(): JSX.Element {
 								</h1>
 							</div>
 							<div className="flex items-center gap-x-4 sm:gap-x-6">
-								{/* <div className="rounded-md flex flex-row align-middle justify-center self-center items-center gap-2 bg-white border-teal-600 border-2 cursor-pointer px-3 py-2 text-sm font-semibold text-teal-600 hover:text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600">
-										<PlusCircleIcon className="h-4 w-4" />{" "}
-										Start a Project
-									</div> */}
-								<NavLink
-									to={"/writer/new-project"}
+								<div
+									onClick={() => {
+										setProjectModalIsOpen(true);
+									}}
 									className="rounded-md flex flex-row align-middle justify-center self-center items-center gap-2 bg-white border-teal-600 border-2 cursor-pointer px-3 py-2 text-sm font-semibold text-teal-600 hover:text-white shadow-sm hover:bg-teal-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
 								>
 									<PlusCircleIcon className="h-4 w-4" /> Start
 									a Project
-								</NavLink>
+								</div>
 								<NavLink
 									to={"/reader"}
 									className="rounded-md flex flex-row align-middle justify-center self-center items-center gap-2 bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-teal-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-teal-600"
@@ -123,14 +126,17 @@ export default function Example(): JSX.Element {
 									</div>
 									<div className="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
 										<div className="flex-1 truncate px-4 py-2 text-sm h-12">
-											<a
-												href={getProjectUrl(
-													project.title
-												)}
-												className="font-medium text-gray-900 hover:text-gray-600"
+											<span
+												onClick={() => {
+													setCurrentProject(
+														project.title
+													);
+													setProjectModalIsOpen(true);
+												}}
+												className="font-medium text-gray-900 hover:text-gray-600 cursor-pointer"
 											>
 												{project.title}
-											</a>
+											</span>
 										</div>
 										<Menu
 											as="div"
@@ -158,10 +164,15 @@ export default function Example(): JSX.Element {
 													<div className="py-1">
 														<Menu.Item>
 															{({ active }) => (
-																<a
-																	href={getProjectUrl(
-																		project.title
-																	)}
+																<span
+																	onClick={() => {
+																		setCurrentProject(
+																			project.title
+																		);
+																		setProjectModalIsOpen(
+																			true
+																		);
+																	}}
 																	className={classNames(
 																		active
 																			? "bg-gray-100 text-gray-900"
@@ -170,7 +181,7 @@ export default function Example(): JSX.Element {
 																	)}
 																>
 																	View
-																</a>
+																</span>
 															)}
 														</Menu.Item>
 													</div>
@@ -317,6 +328,14 @@ export default function Example(): JSX.Element {
 			<div className="mx-auto max-w-7xl lg:p-0 mg:p-0 xl:p-0 md:pt-16 lg:pt-16 xl:pt-16 p-4 md:pb-16 lg:pb-16 xl:pb-16 rounded-lg">
 				<News />
 			</div>
+
+			{projectModaIsOpen && (
+				<ProjectModal
+					currentProject={currentProject}
+					isOpen={projectModaIsOpen}
+					setIsOpen={setProjectModalIsOpen}
+				/>
+			)}
 		</div>
 	);
 }
