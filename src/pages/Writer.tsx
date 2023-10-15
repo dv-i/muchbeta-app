@@ -7,66 +7,17 @@ import {
 	EllipsisVerticalIcon,
 } from "@heroicons/react/20/solid";
 import { NavLink } from "react-router-dom";
+import { projects } from "../constants";
 
-const projects = [
-	{
-		id: 1,
-		title: "The Great Gatsby",
-		initials: "GG",
-		description:
-			"A Jazz Age tale of wealth, ambition, and unrequited love set against the backdrop of opulence and excess.",
-		lastUpdated: "August 17, 2023",
-		pinned: true,
-		bgColorClass: "bg-teal-600",
-	},
-	{
-		id: 1,
-		title: "1984",
-		initials: "1984",
-		description:
-			"A dystopian novel depicting a totalitarian society where individualism is suppressed and truth is controlled by a powerful regime.",
-		lastUpdated: "May 22, 2023",
-		pinned: false,
-		bgColorClass: "bg-teal-600",
-	},
-	{
-		id: 1,
-		title: "To Kill a Mockingbird",
-		initials: "KM",
-		description:
-			"A coming-of-age story that confronts racism and moral complexities in a racially divided Southern town.",
-		lastUpdated: "May 11, 2023",
-		pinned: true,
-		bgColorClass: "bg-teal-600",
-	},
-	{
-		id: 1,
-		title: "Harry Potter and the Sorcerer's Stone",
-		initials: "HP",
-		description:
-			"The enchanting beginning of a series where a young boy discovers his magical heritage and faces the challenges of a hidden wizarding world.",
-		lastUpdated: "April 27, 2023",
-		pinned: true,
-		bgColorClass: "bg-teal-600",
-	},
-	{
-		id: 1,
-		title: "Pride and Prejudice",
-		initials: "PP",
-		description:
-			"A timeless romance that explores societal norms, family dynamics, and the evolving relationship between Elizabeth Bennet and Mr. Darcy.",
-		lastUpdated: "March 17, 2023",
-		pinned: false,
-		bgColorClass: "bg-teal-600",
-	},
-
-	// More projects...
-];
 const pinnedProjects = projects.filter((project) => project.pinned);
 
 function classNames(...classes: string[]): string {
 	return classes.filter(Boolean).join(" ");
 }
+
+const getProjectUrl = (projectTitle: string): string => {
+	return `/writer/project/${projectTitle.toLowerCase().replaceAll(" ", "-")}`;
+};
 
 export default function Example(): JSX.Element {
 	return (
@@ -173,7 +124,9 @@ export default function Example(): JSX.Element {
 									<div className="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
 										<div className="flex-1 truncate px-4 py-2 text-sm h-12">
 											<a
-												href="#"
+												href={getProjectUrl(
+													project.title
+												)}
 												className="font-medium text-gray-900 hover:text-gray-600"
 											>
 												{project.title}
@@ -206,7 +159,9 @@ export default function Example(): JSX.Element {
 														<Menu.Item>
 															{({ active }) => (
 																<a
-																	href="#"
+																	href={getProjectUrl(
+																		project.title
+																	)}
 																	className={classNames(
 																		active
 																			? "bg-gray-100 text-gray-900"

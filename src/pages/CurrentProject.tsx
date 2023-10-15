@@ -1,6 +1,21 @@
 import React, { useState } from "react";
 import { BookOpenIcon } from "@heroicons/react/24/solid";
+import { projects } from "../constants";
 const PRICE_PER_WORD = 0.823;
+
+const getProjectTitleUrlSlug = (): string => {
+	return window.location.pathname.split("/")[3];
+};
+
+const getProjectDetailsFromProjectTitleUrlSlug = (
+	projectTitleUrlSlug: string
+): any => {
+	return projects.find(
+		(project) =>
+			project.title.toLowerCase().replaceAll(" ", "-") ===
+			projectTitleUrlSlug
+	);
+};
 
 /* <div className="flex">
 											<PlusCircleIcon
@@ -12,10 +27,23 @@ const PRICE_PER_WORD = 0.823;
 											</div>
 										</div> */
 
-export default function NewProject(): JSX.Element {
-	const [wordCount, setWordCount] = useState<number>(0);
-	const [numberOfBetaReaders, setNumberOfBetaReaders] = useState<number>(0);
-	const [chapters, setChapters] = useState<string[]>([]);
+export default function CurrentProject(): JSX.Element {
+	const [wordCount, setWordCount] = useState<number>(
+		getProjectDetailsFromProjectTitleUrlSlug(getProjectTitleUrlSlug())
+			.wordCount
+	);
+	const [numberOfBetaReaders, setNumberOfBetaReaders] = useState<number>(
+		getProjectDetailsFromProjectTitleUrlSlug(getProjectTitleUrlSlug())
+			.numberOfBetaReaders
+	);
+	const [chapters, setChapters] = useState<string[]>(
+		getProjectDetailsFromProjectTitleUrlSlug(getProjectTitleUrlSlug())
+			.chapters
+	);
+
+	const [projectTitle, setProjectTitle] = useState(
+		getProjectDetailsFromProjectTitleUrlSlug(getProjectTitleUrlSlug()).title
+	);
 
 	const calculatePrice = (): number => {
 		return Math.ceil(
@@ -51,10 +79,10 @@ export default function NewProject(): JSX.Element {
 							<div className="flex items-center gap-x-6">
 								<h1>
 									<div className="text-sm leading-6 font-semibold text-gray-500">
-										Writer
+										Current Project
 									</div>
 									<div className="mt-1 text-2xl font-semibold leading-6 text-teal-600">
-										New project
+										{projectTitle}
 									</div>
 								</h1>
 							</div>
@@ -80,11 +108,13 @@ export default function NewProject(): JSX.Element {
 										<div className="mt-2">
 											<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
 												<input
+													disabled
 													type="text"
 													name="project-title"
 													id="project-title"
 													autoComplete="project-title"
-													className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+													className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200"
+													value={projectTitle}
 												/>
 											</div>
 										</div>
@@ -112,6 +142,7 @@ export default function NewProject(): JSX.Element {
 															Upload a file
 														</span>
 														<input
+															disabled
 															id="file-upload"
 															name="file-upload"
 															type="file"
@@ -162,10 +193,11 @@ export default function NewProject(): JSX.Element {
 											htmlFor="country"
 											className="block text-sm font-medium leading-6 text-gray-900"
 										>
-											Trigger Warning Selection
+											Trigger Warnings
 										</label>
 										<div className="mt-2">
 											<select
+												disabled
 												id="trigger-warning"
 												name="trigger-warning"
 												autoComplete="trigger-warning-name"
@@ -198,10 +230,11 @@ export default function NewProject(): JSX.Element {
 											htmlFor="demographics"
 											className="block text-sm font-medium leading-6 text-gray-900"
 										>
-											Demographics Selection
+											Demographics
 										</label>
 										<div className="mt-2">
 											<select
+												disabled
 												id="demographics"
 												name="demographics"
 												autoComplete="demographics-name"
@@ -232,12 +265,13 @@ export default function NewProject(): JSX.Element {
 												htmlFor="word-count"
 												className="block text-sm font-medium leading-6 text-gray-900"
 											>
-												Enter the number of words
+												Number of words
 											</label>
 											<input
+												disabled
 												id="word-count"
 												type="number"
-												className="w-full px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
+												className="w-full px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring focus:border-blue-300 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200"
 												value={wordCount}
 												onChange={(e) => {
 													setWordCount(
@@ -259,10 +293,11 @@ export default function NewProject(): JSX.Element {
 											htmlFor="beta-readers"
 											className="block text-sm font-medium leading-6 text-gray-900"
 										>
-											Number of Beta Readers to hire:{" "}
+											Number of Beta Readers hired:{" "}
 											{numberOfBetaReaders}
 										</label>
 										<input
+											disabled
 											id="beta-readers"
 											type="range"
 											min={1}
@@ -282,11 +317,11 @@ export default function NewProject(): JSX.Element {
 											htmlFor="beta-readers-question"
 											className="block text-sm font-medium leading-6 text-gray-900"
 										>
-											Select or type in your own question
-											for Beta Readers
+											Question for Beta Readers
 										</label>
 										<div className="mt-2 mb-2">
 											<select
+												disabled
 												id="beta-readers-question"
 												name="beta-readers-question"
 												autoComplete="beta-readers-question-name"
@@ -299,11 +334,12 @@ export default function NewProject(): JSX.Element {
 										</div>
 										<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
 											<input
+												disabled
 												type="text"
 												name="beta-reader-custom-question"
 												id="beta-reader-custom-question"
 												autoComplete="beta-reader-custom-question"
-												className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+												className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6 disabled:cursor-not-allowed disabled:bg-gray-50 disabled:text-gray-500 disabled:ring-gray-200"
 												placeholder="Enter your own question"
 											/>
 										</div>
@@ -312,14 +348,14 @@ export default function NewProject(): JSX.Element {
 							</div>
 						</div>
 
-						<div className="mt-6 flex items-center justify-end gap-x-6">
+						{/* <div className="mt-6 flex items-center justify-end gap-x-6">
 							<button
 								type="submit"
 								className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 							>
 								Submit
 							</button>
-						</div>
+						</div> */}
 					</form>
 				</main>
 			</div>
