@@ -1,109 +1,17 @@
 import { PencilSquareIcon } from "@heroicons/react/20/solid";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
-
-const invoice = {
-	subTotal: "$8,800.00",
-	tax: "$1,760.00",
-	total: "$10,560.00",
-	items: [
-		{
-			id: 1,
-			title: "The Alchemist",
-			author: "Paulo Coelho",
-			description:
-				"A shepherd's quest for treasure turns into a journey of self-discovery and life's true meaning.",
-			price: "$2,000.00",
-		},
-		{
-			id: 2,
-			title: "Jane Eyre",
-			author: "Charlotte Bronte",
-			description:
-				"An orphaned governess's journey through love and identity challenges, complicated by her employer's secrets.",
-			price: "$5,200.00",
-		},
-		{
-			id: 3,
-			title: "The Fault in Our Stars",
-			author: "John Green",
-			description:
-				"Two teenagers facing cancer fall in love, exploring life's complexities with humor and heartache.",
-			price: "$1,200.00",
-		},
-		{
-			id: 4,
-			title: "Animal Farm",
-			author: "George Orwell",
-			description:
-				"Farm animals' rebellion evolves into a cautionary tale about power and corruption.",
-			price: "$400.00",
-		},
-	],
-};
-const activity = [
-	{
-		id: 1,
-		type: "completed",
-		readJob: { name: "The Catcher in the Rye" },
-		date: "1d ago",
-		// dateTime: "2023-01-23T10:32",
-	},
-	{
-		id: 2,
-		type: "accepted",
-		readJob: { name: "The Catcher in the Rye" },
-		date: "6d ago",
-		// dateTime: "2023-01-23T11:03",
-	},
-	{
-		id: 3,
-		type: "completed",
-		readJob: { name: "To Kill a Mockingbird" },
-		date: "7d ago",
-		// dateTime: "2023-01-23T11:24",
-	},
-	{
-		id: 4,
-		type: "completed",
-		readJob: { name: "Harry Potter and the Sorcerer's Stone" },
-		date: "7d ago",
-		// dateTime: "2023-01-23T11:24",
-	},
-	{
-		id: 5,
-		type: "commented",
-		readJob: {
-			name: "To Kill a Mockingbird",
-			imageUrl:
-				"https://images.unsplash.com/photo-1550525811-e5869dd03032?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-		},
-		comment:
-			"Added summary: Set in the American South, a young girl learns about racial injustice and moral growth through her father's defense of an unjustly accused black man.",
-		date: "10d ago",
-		// dateTime: "2023-01-23T15:56",
-	},
-	{
-		id: 6,
-		type: "accepted",
-		readJob: { name: "To Kill a Mockingbird" },
-		date: "15d ago",
-		// dateTime: "2023-01-24T09:12",
-	},
-	{
-		id: 7,
-		type: "accepted",
-		readJob: { name: "Harry Potter and the Sorcerer's Stone" },
-		date: "16d ago",
-		dateTime: "2023-01-24T09:20",
-	},
-];
+import { ReaderJobModal } from "../components/ReaderJobModal";
+import { matches, pastReads } from "../constants";
 
 function classNames(...classes: string[]): string {
 	return classes.filter(Boolean).join(" ");
 }
 
 export default function Example(): JSX.Element {
+	const [jobModaIsOpen, setJobModalIsOpen] = useState<boolean>(false);
+	const [currentJob, setCurrentJob] = useState<string | undefined>();
 	return (
 		<main>
 			<header className="relative isolate">
@@ -252,10 +160,14 @@ export default function Example(): JSX.Element {
 									</tr>
 								</thead>
 								<tbody>
-									{invoice.items.map((item) => (
+									{matches.map((item) => (
 										<tr
+											onClick={() => {
+												setCurrentJob(item.title);
+												setJobModalIsOpen(true);
+											}}
 											key={item.id}
-											className="border-b border-gray-100"
+											className="border-b border-gray-100 cursor-pointer"
 										>
 											<td className="max-w-0 px-0 py-5 align-top">
 												<div className="truncate font-semibold text-md text-teal-700">
@@ -288,15 +200,21 @@ export default function Example(): JSX.Element {
 							Past Reads
 						</h2>
 						<ul role="list" className="mt-6 space-y-6">
-							{activity.map((activityItem, activityItemIdx) => (
+							{pastReads.map((activityItem, activityItemIdx) => (
 								<li
+									onClick={() => {
+										setCurrentJob(
+											activityItem.readJob.name
+										);
+										setJobModalIsOpen(true);
+									}}
 									key={activityItem.id}
-									className="relative flex gap-x-4"
+									className="relative flex gap-x-4 cursor-pointer"
 								>
 									<div
 										className={classNames(
 											activityItemIdx ===
-												activity.length - 1
+												pastReads.length - 1
 												? "h-6"
 												: "-bottom-6",
 											"absolute left-0 top-0 flex w-6 justify-center"
@@ -375,6 +293,13 @@ export default function Example(): JSX.Element {
 					</div>
 				</div>
 			</div>
+			{jobModaIsOpen && (
+				<ReaderJobModal
+					currentJob={currentJob}
+					isOpen={jobModaIsOpen}
+					setIsOpen={setJobModalIsOpen}
+				/>
+			)}
 		</main>
 	);
 }

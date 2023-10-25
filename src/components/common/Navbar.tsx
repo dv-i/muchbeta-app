@@ -44,7 +44,7 @@ export default function Example(): JSX.Element {
 						<NavLink
 							to="/wallet"
 							type="button"
-							className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+							className="cursor-pointer relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
 						>
 							<span className="sr-only">View notifications</span>
 							<WalletIcon
@@ -56,7 +56,7 @@ export default function Example(): JSX.Element {
 						{/* Profile dropdown */}
 						<NavLink
 							to="/profile"
-							className="relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
+							className="cursor-pointer relative rounded-full bg-white p-1 text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2"
 						>
 							<span className="sr-only">View notifications</span>
 							<UserCircleIcon

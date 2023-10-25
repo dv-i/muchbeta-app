@@ -226,7 +226,7 @@ export default function Example(): JSX.Element {
 									htmlFor="logout-password"
 									className="block text-sm font-medium leading-6 text-gray-700"
 								>
-									Your password
+									Your genres
 								</label>
 								<div className="mt-2">
 									<Select
