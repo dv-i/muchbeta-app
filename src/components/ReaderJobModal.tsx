@@ -1,5 +1,4 @@
 import { Transition, Dialog } from "@headlessui/react";
-import { BookOpenIcon } from "@heroicons/react/20/solid";
 import React, { Fragment, useState } from "react";
 import { PRICE_PER_WORD, matches, pastReads } from "../constants";
 import type { Job } from "../interfaces";
@@ -77,10 +76,6 @@ export const ReaderJobModal = ({
 			label: "Working Professionals",
 		},
 	]);
-
-	const handleFormSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
-		e.preventDefault();
-	};
 
 	const handleOnAcceptClick = (): void => {
 		console.log("here");

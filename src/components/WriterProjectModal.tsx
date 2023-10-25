@@ -1,9 +1,5 @@
-import { Transition, Dialog, Disclosure } from "@headlessui/react";
-import {
-	BookOpenIcon,
-	MinusSmallIcon,
-	PlusSmallIcon,
-} from "@heroicons/react/20/solid";
+import { Transition, Dialog } from "@headlessui/react";
+import { BookOpenIcon } from "@heroicons/react/20/solid";
 import React, { Fragment, useEffect, useState } from "react";
 import { PRICE_PER_WORD, projects } from "../constants";
 import type { Project } from "../interfaces";
