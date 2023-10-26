@@ -1,6 +1,6 @@
 import { Transition, Dialog } from "@headlessui/react";
 import { BookOpenIcon, StarIcon } from "@heroicons/react/20/solid";
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { PRICE_PER_WORD, projects } from "../constants";
 import type { Project } from "../interfaces";
 import Select from "react-tailwindcss-select";
