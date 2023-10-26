@@ -556,147 +556,159 @@ export const ReaderJobModal = ({
 														</div>
 													</div>
 
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="comment"
-															className="block text-md font-medium leading-6 text-gray-900"
-														>
-															Your feedback for
-															this story:
-														</label>
-													</div>
+													{getPastReadJobDetails(
+														currentJob
+													) &&
+														getPastReadJobDetails(
+															currentJob
+														).feedback && (
+															<>
+																<div className="sm:col-span-4">
+																	<label
+																		htmlFor="comment"
+																		className="block text-md font-medium leading-6 text-gray-900"
+																	>
+																		Your
+																		feedback
+																		for this
+																		story:
+																	</label>
+																</div>
+																<div className="sm:col-span-4">
+																	<label
+																		htmlFor="project-title"
+																		className="block text-sm font-medium leading-6 text-gray-900"
+																	>
+																		Macro
+																	</label>
+																	<div className="mt-2">
+																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																			<textarea
+																				disabled
+																				value={
+																					getPastReadJobDetails(
+																						currentJob
+																					)
+																						.feedback
+																						.macro
+																				}
+																				name="project-title"
+																				id="project-title"
+																				autoComplete="project-title"
+																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																			/>
+																		</div>
+																	</div>
+																</div>
+																<div className="sm:col-span-4">
+																	<label
+																		htmlFor="project-title"
+																		className="block text-sm font-medium leading-6 text-gray-900"
+																	>
+																		Micro
+																	</label>
+																	<div className="mt-2">
+																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																			<textarea
+																				disabled
+																				value={
+																					getPastReadJobDetails(
+																						currentJob
+																					)
+																						.feedback
+																						.micro
+																				}
+																				name="project-title"
+																				id="project-title"
+																				autoComplete="project-title"
+																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																			/>
+																		</div>
+																	</div>
+																</div>
+																<div className="sm:col-span-4">
+																	<label
+																		htmlFor="project-title"
+																		className="block text-sm font-medium leading-6 text-gray-900"
+																	>
+																		Word
+																		Building
+																	</label>
+																	<div className="mt-2">
+																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																			<textarea
+																				disabled
+																				value={
+																					getPastReadJobDetails(
+																						currentJob
+																					)
+																						.feedback
+																						.wordBuilding
+																				}
+																				name="project-title"
+																				id="project-title"
+																				autoComplete="project-title"
+																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																			/>
+																		</div>
+																	</div>
+																</div>
 
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Macro
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	disabled
-																	value={
-																		getPastReadJobDetails(
-																			currentJob
-																		)
-																			.feedback
-																			.macro
-																	}
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Micro
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	disabled
-																	value={
-																		getPastReadJobDetails(
-																			currentJob
-																		)
-																			.feedback
-																			.micro
-																	}
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Word Building
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	disabled
-																	value={
-																		getPastReadJobDetails(
-																			currentJob
-																		)
-																			.feedback
-																			.wordBuilding
-																	}
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
-
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Story Arc
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	disabled
-																	value={
-																		getPastReadJobDetails(
-																			currentJob
-																		)
-																			.feedback
-																			.storyArc
-																	}
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Characters
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	disabled
-																	value={
-																		getPastReadJobDetails(
-																			currentJob
-																		)
-																			.feedback
-																			.characters
-																	}
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
+																<div className="sm:col-span-4">
+																	<label
+																		htmlFor="project-title"
+																		className="block text-sm font-medium leading-6 text-gray-900"
+																	>
+																		Story
+																		Arc
+																	</label>
+																	<div className="mt-2">
+																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																			<textarea
+																				disabled
+																				value={
+																					getPastReadJobDetails(
+																						currentJob
+																					)
+																						.feedback
+																						.storyArc
+																				}
+																				name="project-title"
+																				id="project-title"
+																				autoComplete="project-title"
+																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																			/>
+																		</div>
+																	</div>
+																</div>
+																<div className="sm:col-span-4">
+																	<label
+																		htmlFor="project-title"
+																		className="block text-sm font-medium leading-6 text-gray-900"
+																	>
+																		Characters
+																	</label>
+																	<div className="mt-2">
+																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																			<textarea
+																				disabled
+																				value={
+																					getPastReadJobDetails(
+																						currentJob
+																					)
+																						.feedback
+																						.characters
+																				}
+																				name="project-title"
+																				id="project-title"
+																				autoComplete="project-title"
+																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																			/>
+																		</div>
+																	</div>
+																</div>
+															</>
+														)}
 
 													<div className="col-span-full">
 														<div className="relative flex items-start">
