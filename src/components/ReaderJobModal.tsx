@@ -78,7 +78,6 @@ export const ReaderJobModal = ({
 	]);
 
 	const handleOnAcceptClick = (): void => {
-		console.log("here");
 		setIsFeedbackMode(true);
 	};
 	return (

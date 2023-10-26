@@ -1,5 +1,5 @@
 import { Transition, Dialog } from "@headlessui/react";
-import { BookOpenIcon } from "@heroicons/react/20/solid";
+import { BookOpenIcon, StarIcon } from "@heroicons/react/20/solid";
 import React, { Fragment, useEffect, useState } from "react";
 import { PRICE_PER_WORD, projects } from "../constants";
 import type { Project } from "../interfaces";
@@ -102,6 +102,10 @@ const people = [
 	},
 ];
 
+function classNames(...classes: any): string {
+	return classes.filter(Boolean).join(" ");
+}
+
 interface WriterProjectModalProps {
 	isOpen: boolean;
 	setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -131,6 +135,12 @@ export const WriterProjectModal = ({
 	const [projectTitle] = useState<string>(
 		getProjectDetails(currentProject)?.title || ""
 	);
+
+	const [review1, setReview1] = useState(0);
+	const [review2, setReview2] = useState(0);
+	const [review3, setReview3] = useState(0);
+	const [review4, setReview4] = useState(0);
+	const [review5, setReview5] = useState(0);
 
 	const [genrePreferences, setGenrePreferences] = useState<Option | Option[]>(
 		currentProject
@@ -178,10 +188,6 @@ export const WriterProjectModal = ({
 			  ]
 			: []
 	);
-
-	useEffect(() => {
-		console.log("current", currentFeedback);
-	}, [currentFeedback]);
 
 	const calculatePrice = (): number => {
 		return Math.ceil(
@@ -517,6 +523,85 @@ export const WriterProjectModal = ({
 			</>
 		);
 	};
+
+	const renderReviewWidget = (reviewNumber: number): JSX.Element => {
+		const getCurrentRating = (reviewNumber: number): number => {
+			switch (reviewNumber) {
+				case 1:
+					return review1;
+
+				case 2:
+					return review2;
+				case 3:
+					return review3;
+				case 4:
+					return review4;
+
+				case 5:
+					return review5;
+				default:
+					return 0;
+			}
+		};
+		return (
+			<div className="flex">
+				{[1, 2, 3, 4, 5].map((rating) => {
+					return (
+						<StarIcon
+							onClick={() => {
+								switch (reviewNumber) {
+									case 1:
+										if (rating === review1) {
+											setReview1(review1 - 1);
+										} else {
+											setReview1(rating);
+										}
+
+										break;
+									case 2:
+										if (rating === review2) {
+											setReview2(review2 - 1);
+										} else {
+											setReview2(rating);
+										}
+										break;
+									case 3:
+										if (rating === review3) {
+											setReview3(review3 - 1);
+										} else {
+											setReview3(rating);
+										}
+										break;
+									case 4:
+										if (rating === review4) {
+											setReview4(review4 - 1);
+										} else {
+											setReview4(rating);
+										}
+										break;
+									case 5:
+										if (rating === review5) {
+											setReview5(review5 - 1);
+										} else {
+											setReview5(rating);
+										}
+										break;
+								}
+							}}
+							key={rating}
+							className={classNames(
+								rating <= getCurrentRating(reviewNumber)
+									? "text-yellow-400"
+									: "text-gray-200",
+								"h-5 w-5 flex-shrink-0 cursor-pointer"
+							)}
+							aria-hidden="true"
+						/>
+					);
+				})}
+			</div>
+		);
+	};
 	return (
 		<Transition.Root show={isOpen} as={Fragment}>
 			<Dialog as="div" className="relative z-10" onClose={setIsOpen}>
@@ -560,141 +645,356 @@ export const WriterProjectModal = ({
 												undefined ? (
 													<>
 														<div className="sm:col-span-4">
-															<label
-																htmlFor="project-title"
-																className="block text-md font-medium leading-6 text-gray-900"
-															>
-																Viewing feedback
-																for{" "}
-																{
-																	currentFeedback.name
-																}
-																:
-															</label>
-														</div>
-														<div className="sm:col-span-4">
-															<label
-																htmlFor="project-title"
-																className="block text-sm font-medium leading-6 text-gray-900"
-															>
-																Macro
-															</label>
-															<div className="mt-2">
-																<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																	<textarea
-																		value={
-																			currentFeedback
-																				.feedback
-																				.macro
+															<div className="flex gap-20">
+																<div className="flex-1 ">
+																	<label
+																		htmlFor="project-title"
+																		className="block text-md font-medium leading-6 text-gray-900 pb-4"
+																	>
+																		Viewing
+																		feedback
+																		from{" "}
+																		{
+																			currentFeedback.name
 																		}
-																		disabled
-																		name="project-title"
-																		id="project-title"
-																		autoComplete="project-title"
-																		className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																	/>
+																		:
+																	</label>
+																	<div className="flex flex-col gap-8">
+																		<div className="sm:col-span-4">
+																			<label
+																				htmlFor="project-title"
+																				className="block text-sm font-medium leading-6 text-gray-900"
+																			>
+																				Macro
+																			</label>
+																			<div className="mt-2">
+																				<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																					<textarea
+																						value={
+																							currentFeedback
+																								.feedback
+																								.macro
+																						}
+																						disabled
+																						name="project-title"
+																						id="project-title"
+																						autoComplete="project-title"
+																						className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																					/>
+																				</div>
+																			</div>
+																		</div>
+																		<div className="sm:col-span-4">
+																			<label
+																				htmlFor="project-title"
+																				className="block text-sm font-medium leading-6 text-gray-900"
+																			>
+																				Micro
+																			</label>
+																			<div className="mt-2">
+																				<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																					<textarea
+																						value={
+																							currentFeedback
+																								.feedback
+																								.micro
+																						}
+																						disabled
+																						name="project-title"
+																						id="project-title"
+																						autoComplete="project-title"
+																						className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																					/>
+																				</div>
+																			</div>
+																		</div>
+																		<div className="sm:col-span-4">
+																			<label
+																				htmlFor="project-title"
+																				className="block text-sm font-medium leading-6 text-gray-900"
+																			>
+																				Word
+																				Building
+																			</label>
+																			<div className="mt-2">
+																				<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																					<textarea
+																						value={
+																							currentFeedback
+																								.feedback
+																								.wordBuilding
+																						}
+																						disabled
+																						name="project-title"
+																						id="project-title"
+																						autoComplete="project-title"
+																						className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																					/>
+																				</div>
+																			</div>
+																		</div>
+
+																		<div className="sm:col-span-4">
+																			<label
+																				htmlFor="project-title"
+																				className="block text-sm font-medium leading-6 text-gray-900"
+																			>
+																				Story
+																				Arc
+																			</label>
+																			<div className="mt-2">
+																				<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																					<textarea
+																						value={
+																							currentFeedback
+																								.feedback
+																								.storyArc
+																						}
+																						disabled
+																						name="project-title"
+																						id="project-title"
+																						autoComplete="project-title"
+																						className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																					/>
+																				</div>
+																			</div>
+																		</div>
+																		<div className="sm:col-span-4">
+																			<label
+																				htmlFor="project-title"
+																				className="block text-sm font-medium leading-6 text-gray-900"
+																			>
+																				Characters
+																			</label>
+																			<div className="mt-2">
+																				<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																					<textarea
+																						value={
+																							currentFeedback
+																								.feedback
+																								.characters
+																						}
+																						disabled
+																						name="project-title"
+																						id="project-title"
+																						autoComplete="project-title"
+																						className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																					/>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
 																</div>
-															</div>
-														</div>
-														<div className="sm:col-span-4">
-															<label
-																htmlFor="project-title"
-																className="block text-sm font-medium leading-6 text-gray-900"
-															>
-																Micro
-															</label>
-															<div className="mt-2">
-																<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																	<textarea
-																		value={
-																			currentFeedback
-																				.feedback
-																				.micro
+																<div className="flex-1">
+																	<label
+																		htmlFor="project-title"
+																		className="block text-md font-medium leading-6 text-gray-900 pb-4"
+																	>
+																		Submit
+																		your
+																		feedback
+																		for{" "}
+																		{
+																			currentFeedback.name
 																		}
-																		disabled
-																		name="project-title"
-																		id="project-title"
-																		autoComplete="project-title"
-																		className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																	/>
-																</div>
-															</div>
-														</div>
-														<div className="sm:col-span-4">
-															<label
-																htmlFor="project-title"
-																className="block text-sm font-medium leading-6 text-gray-900"
-															>
-																Word Building
-															</label>
-															<div className="mt-2">
-																<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																	<textarea
-																		value={
-																			currentFeedback
-																				.feedback
-																				.wordBuilding
-																		}
-																		disabled
-																		name="project-title"
-																		id="project-title"
-																		autoComplete="project-title"
-																		className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																	/>
+																		:
+																	</label>
+																	<div className="flex-1 flex gap-8 flex-col">
+																		<div className="flex items-center xl:col-span-1">
+																			<div className="flex items-center flex-col gap-8">
+																				<div>
+																					Was
+																					this
+																					review...?
+																					<div className="flex">
+																						{renderReviewWidget(
+																							1
+																						)}
+																						<p className="ml-3 text-sm text-gray-700">
+																							{
+																								review1
+																							}
+																							<span className="sr-only">
+																								{" "}
+																								out
+																								of
+																								5
+																								stars
+																							</span>
+																						</p>
+																					</div>
+																				</div>
+																				<div>
+																					Did
+																					the
+																					reader...?
+																					<div className="flex">
+																						{renderReviewWidget(
+																							2
+																						)}
+																						<p className="ml-3 text-sm text-gray-700">
+																							{
+																								review2
+																							}
+																							<span className="sr-only">
+																								{" "}
+																								out
+																								of
+																								5
+																								stars
+																							</span>
+																						</p>
+																					</div>
+																				</div>
+																				<div>
+																					Was
+																					this...?
+																					<div className="flex">
+																						{renderReviewWidget(
+																							3
+																						)}
+																						<p className="ml-3 text-sm text-gray-700">
+																							{
+																								review3
+																							}
+																							<span className="sr-only">
+																								{" "}
+																								out
+																								of
+																								5
+																								stars
+																							</span>
+																						</p>
+																					</div>
+																				</div>
+																				<div>
+																					Review
+																					put...
+																					<div className="flex">
+																						{renderReviewWidget(
+																							4
+																						)}
+																						<p className="ml-3 text-sm text-gray-700">
+																							{
+																								review4
+																							}
+																							<span className="sr-only">
+																								{" "}
+																								out
+																								of
+																								5
+																								stars
+																							</span>
+																						</p>
+																					</div>
+																				</div>
+																				<div>
+																					Reader
+																					is...
+																					<div className="flex">
+																						{renderReviewWidget(
+																							5
+																						)}
+																						<p className="ml-3 text-sm text-gray-700">
+																							{
+																								review5
+																							}
+																							<span className="sr-only">
+																								{" "}
+																								out
+																								of
+																								5
+																								stars
+																							</span>
+																						</p>
+																					</div>
+																				</div>
+																			</div>
+																		</div>
+																		<div className="sm:col-span-4">
+																			<label
+																				htmlFor="project-title"
+																				className="block text-sm font-medium leading-6 text-gray-900"
+																			>
+																				Review
+																				for
+																				this
+																				reader
+																			</label>
+																			<div className="mt-2">
+																				<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																					<textarea
+																						name="project-title"
+																						id="project-title"
+																						autoComplete="project-title"
+																						className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																					/>
+																				</div>
+																			</div>
+																		</div>
+																		<div className="col-span-full">
+																			<div className="relative flex items-start">
+																				<div className="flex h-6 items-center">
+																					<input
+																						id="candidates"
+																						aria-describedby="candidates-description"
+																						name="candidates"
+																						type="checkbox"
+																						className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+																					/>
+																				</div>
+																				<div className="ml-3 text-sm leading-6">
+																					<label
+																						htmlFor="candidates"
+																						className="font-medium text-gray-900"
+																					>
+																						Report
+																						this
+																						review?
+																					</label>
+																				</div>
+																			</div>
+																		</div>
+																		<div className="col-span-full">
+																			<div className="relative flex items-start">
+																				<div className="flex h-6 items-center">
+																					<input
+																						id="candidates"
+																						aria-describedby="candidates-description"
+																						name="candidates"
+																						type="checkbox"
+																						className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+																					/>
+																				</div>
+																				<div className="ml-3 text-sm leading-6">
+																					<label
+																						htmlFor="candidates"
+																						className="font-medium text-gray-900"
+																					>
+																						Exclude
+																						this
+																						beta
+																						reader?
+																					</label>
+																				</div>
+																			</div>
+																		</div>
+																	</div>
 																</div>
 															</div>
 														</div>
 
-														<div className="sm:col-span-4">
-															<label
-																htmlFor="project-title"
-																className="block text-sm font-medium leading-6 text-gray-900"
+														<div className="sm:col-span-full flex justify-end gap-2">
+															<button
+																onClick={() => {
+																	setCurrentFeedback(
+																		undefined
+																	);
+																}}
+																className="rounded-md bg-gray-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 															>
-																Story Arc
-															</label>
-															<div className="mt-2">
-																<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																	<textarea
-																		value={
-																			currentFeedback
-																				.feedback
-																				.storyArc
-																		}
-																		disabled
-																		name="project-title"
-																		id="project-title"
-																		autoComplete="project-title"
-																		className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																	/>
-																</div>
-															</div>
-														</div>
-														<div className="sm:col-span-4">
-															<label
-																htmlFor="project-title"
-																className="block text-sm font-medium leading-6 text-gray-900"
-															>
-																Characters
-															</label>
-															<div className="mt-2">
-																<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																	<textarea
-																		value={
-																			currentFeedback
-																				.feedback
-																				.characters
-																		}
-																		disabled
-																		name="project-title"
-																		id="project-title"
-																		autoComplete="project-title"
-																		className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																	/>
-																</div>
-															</div>
-														</div>
-
-														<div className="sm:col-span-4">
+																Back
+															</button>
 															<button
 																onClick={() => {
 																	setCurrentFeedback(
@@ -703,7 +1003,7 @@ export const WriterProjectModal = ({
 																}}
 																className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 															>
-																Back
+																Submit
 															</button>
 														</div>
 													</>
