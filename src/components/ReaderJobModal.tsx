@@ -121,152 +121,137 @@ export const ReaderJobModal = ({
 									<>
 										<div className="space-y-12">
 											<div className="pb-12">
-												<div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-													<div className="sm:col-span-4">
+												<div className="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
 														<label
-															htmlFor="comment"
-															className="block text-sm font-medium leading-6 text-gray-900"
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
 														>
 															Story
 														</label>
-														<div className="mt-2">
-															<textarea
-																rows={4}
-																name="comment"
-																id="comment"
-																className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
-																defaultValue={
-																	""
-																}
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																<textarea
+																	rows={4}
+																	name="comment"
+																	id="comment"
+																	className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+																	defaultValue={
+																		""
+																	}
+																/>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Macro
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																<textarea
+																	name="project-title"
+																	id="project-title"
+																	autoComplete="project-title"
+																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																/>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Micro
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																<textarea
+																	name="project-title"
+																	id="project-title"
+																	autoComplete="project-title"
+																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																/>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Word Building
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																<textarea
+																	name="project-title"
+																	id="project-title"
+																	autoComplete="project-title"
+																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																/>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Story Arc
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																<textarea
+																	name="project-title"
+																	id="project-title"
+																	autoComplete="project-title"
+																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																/>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Characters
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																<textarea
+																	name="project-title"
+																	id="project-title"
+																	autoComplete="project-title"
+																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+																/>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Exclude this writer?
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<input
+																id="candidates"
+																aria-describedby="candidates-description"
+																name="candidates"
+																type="checkbox"
+																className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
 															/>
 														</div>
 													</div>
 
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="comment"
-															className="block text-md font-medium leading-6 text-gray-900"
-														>
-															Fill in the selected
-															prompts for this
-															story:
-														</label>
-													</div>
-
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Macro
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Micro
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Word Building
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
-
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Story Arc
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
-													<div className="sm:col-span-4">
-														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
-														>
-															Characters
-														</label>
-														<div className="mt-2">
-															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																<textarea
-																	name="project-title"
-																	id="project-title"
-																	autoComplete="project-title"
-																	className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																/>
-															</div>
-														</div>
-													</div>
-
-													<div className="col-span-full">
-														<div className="relative flex items-start">
-															<div className="flex h-6 items-center">
-																<input
-																	id="candidates"
-																	aria-describedby="candidates-description"
-																	name="candidates"
-																	type="checkbox"
-																	className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-																/>
-															</div>
-															<div className="ml-3 text-sm leading-6">
-																<label
-																	htmlFor="candidates"
-																	className="font-medium text-gray-900"
-																>
-																	Exclude this
-																	writer?
-																</label>
-															</div>
-														</div>
-													</div>
+													{/* INSERT HERE */}
 												</div>
 											</div>
 										</div>
@@ -289,7 +274,9 @@ export const ReaderJobModal = ({
 														}}
 														className="rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 													>
-														Accept
+														{isFeedbackMode
+															? "Submit Feedback"
+															: "Accept Job"}
 													</button>
 												</div>
 											)}
@@ -298,15 +285,15 @@ export const ReaderJobModal = ({
 									<>
 										<div className="space-y-12">
 											<div className="pb-12">
-												<div className="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-													<div className="sm:col-span-4">
+												<div className="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
 														<label
-															htmlFor="project-title"
-															className="block text-sm font-medium leading-6 text-gray-900"
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
 														>
 															Job Title
 														</label>
-														<div className="mt-2">
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
 															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
 																<input
 																	disabled={
@@ -325,412 +312,260 @@ export const ReaderJobModal = ({
 															</div>
 														</div>
 													</div>
-
-													<div className="col-span-full">
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
 														<label
-															htmlFor="logout-password"
-															className="block text-sm font-medium leading-6 text-gray-700"
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
 														>
 															Trigger warnings
 														</label>
-														<div className="mt-2">
-															<Select
-																isDisabled
-																options={[
-																	{
-																		value: "Violence and Graphic Descriptions",
-																		label: "Violence and Graphic Descriptions",
-																	},
-																	{
-																		value: "Sexual Assault and Non-consensual Content",
-																		label: "Sexual Assault and Non-consensual Content",
-																	},
-																	{
-																		value: "Mental Health and Suicide",
-																		label: "Mental Health and Suicide",
-																	},
-																	{
-																		value: "Substance Abuse and Addiction",
-																		label: "Substance Abuse and Addiction",
-																	},
-																	{
-																		value: "Racial and Cultural Violence",
-																		label: "Racial and Cultural Violence",
-																	},
-																]}
-																value={
-																	triggerWarnings ??
-																	null
-																}
-																isMultiple
-																onChange={function (
-																	value: SelectValue
-																): void {
-																	value &&
-																		setTriggerWarnings(
-																			value
-																		);
-																}}
-																primaryColor={
-																	"teal"
-																}
-															/>
+														<div className="mt-2 sm:col-span-1 sm:mt-0">
+															<div className="mt-2">
+																<Select
+																	isDisabled
+																	isSearchable
+																	options={[
+																		{
+																			value: "Violence and Graphic Descriptions",
+																			label: "Violence and Graphic Descriptions",
+																		},
+																		{
+																			value: "Sexual Assault and Non-consensual Content",
+																			label: "Sexual Assault and Non-consensual Content",
+																		},
+																		{
+																			value: "Mental Health and Suicide",
+																			label: "Mental Health and Suicide",
+																		},
+																		{
+																			value: "Substance Abuse and Addiction",
+																			label: "Substance Abuse and Addiction",
+																		},
+																		{
+																			value: "Racial and Cultural Violence",
+																			label: "Racial and Cultural Violence",
+																		},
+																	]}
+																	value={
+																		triggerWarnings ??
+																		null
+																	}
+																	isMultiple
+																	onChange={function (
+																		value: SelectValue
+																	): void {
+																		value &&
+																			setTriggerWarnings(
+																				value
+																			);
+																	}}
+																	primaryColor={
+																		"teal"
+																	}
+																/>
+															</div>
 														</div>
 													</div>
-
-													<div className="col-span-full">
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
 														<label
-															htmlFor="logout-password"
-															className="block text-sm font-medium leading-6 text-gray-700"
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
 														>
 															Genre Preferences
 														</label>
-														<div className="mt-2">
-															<Select
-																isDisabled
-																options={[
-																	{
-																		value: "action",
-																		label: "Action",
-																	},
-																	{
-																		value: "adventure",
-																		label: "Adventure",
-																	},
-																	{
-																		value: "comedy",
-																		label: "Comedy",
-																	},
-																	{
-																		value: "drama",
-																		label: "Drama",
-																	},
-																	{
-																		value: "fantasy",
-																		label: "Fantasy",
-																	},
-																	{
-																		value: "horror",
-																		label: "Horror",
-																	},
-																	{
-																		value: "mystery",
-																		label: "Mystery",
-																	},
-																	{
-																		value: "romance",
-																		label: "Romance",
-																	},
-																	{
-																		value: "sci-fi",
-																		label: "Sci-Fi",
-																	},
-																	{
-																		value: "thriller",
-																		label: "Thriller",
-																	},
-																	{
-																		value: "historical-fiction",
-																		label: "Historical Fiction",
-																	},
-																	{
-																		value: "non-fiction",
-																		label: "Non-Fiction",
-																	},
-																	{
-																		value: "poetry",
-																		label: "Poetry",
-																	},
-																]}
-																value={
-																	genrePreferences ??
-																	null
-																}
-																isMultiple
-																onChange={function (
-																	value: SelectValue
-																): void {
-																	value &&
-																		setGenrePreferences(
-																			value
-																		);
-																}}
-																primaryColor={
-																	"teal"
-																}
-															/>
+														<div className="mt-2 sm:col-span-1 sm:mt-0">
+															<div className="mt-2">
+																<Select
+																	isDisabled
+																	options={[
+																		{
+																			value: "action",
+																			label: "Action",
+																		},
+																		{
+																			value: "adventure",
+																			label: "Adventure",
+																		},
+																		{
+																			value: "comedy",
+																			label: "Comedy",
+																		},
+																		{
+																			value: "drama",
+																			label: "Drama",
+																		},
+																		{
+																			value: "fantasy",
+																			label: "Fantasy",
+																		},
+																		{
+																			value: "horror",
+																			label: "Horror",
+																		},
+																		{
+																			value: "mystery",
+																			label: "Mystery",
+																		},
+																		{
+																			value: "romance",
+																			label: "Romance",
+																		},
+																		{
+																			value: "sci-fi",
+																			label: "Sci-Fi",
+																		},
+																		{
+																			value: "thriller",
+																			label: "Thriller",
+																		},
+																		{
+																			value: "historical-fiction",
+																			label: "Historical Fiction",
+																		},
+																		{
+																			value: "non-fiction",
+																			label: "Non-Fiction",
+																		},
+																		{
+																			value: "poetry",
+																			label: "Poetry",
+																		},
+																	]}
+																	value={
+																		genrePreferences ??
+																		null
+																	}
+																	isMultiple
+																	onChange={function (
+																		value: SelectValue
+																	): void {
+																		value &&
+																			setGenrePreferences(
+																				value
+																			);
+																	}}
+																	primaryColor={
+																		"teal"
+																	}
+																/>
+															</div>
 														</div>
 													</div>
-
-													<div className="col-span-full">
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
 														<label
-															htmlFor="logout-password"
-															className="block text-sm font-medium leading-6 text-gray-700"
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
 														>
 															Demographics
 															Selection
 														</label>
-														<div className="mt-2">
-															<Select
-																isDisabled
-																options={[
-																	{
-																		value: "Young Adults (Ages 16-24)",
-																		label: "Young Adults (Ages 16-24)",
-																	},
-																	{
-																		value: "Working Professionals",
-																		label: "Working Professionals",
-																	},
-																	{
-																		value: "Parents and Caregivers",
-																		label: "Parents and Caregivers",
-																	},
-																	{
-																		value: "Seniors (Ages 65+)",
-																		label: "Seniors (Ages 65+)",
-																	},
-																	{
-																		value: "Science Enthusiasts",
-																		label: "Science Enthusiasts",
-																	},
-																]}
-																value={
-																	demographicsSelection ??
-																	null
-																}
-																isMultiple
-																onChange={function (
-																	value: SelectValue
-																): void {
-																	value &&
-																		setDemographicsSelection(
-																			value
-																		);
-																}}
-																primaryColor={
-																	"teal"
-																}
-															/>
+														<div className="mt-2 sm:col-span-1 sm:mt-0">
+															<div className="mt-2">
+																<Select
+																	isDisabled
+																	options={[
+																		{
+																			value: "Young Adults (Ages 16-24)",
+																			label: "Young Adults (Ages 16-24)",
+																		},
+																		{
+																			value: "Working Professionals",
+																			label: "Working Professionals",
+																		},
+																		{
+																			value: "Parents and Caregivers",
+																			label: "Parents and Caregivers",
+																		},
+																		{
+																			value: "Seniors (Ages 65+)",
+																			label: "Seniors (Ages 65+)",
+																		},
+																		{
+																			value: "Science Enthusiasts",
+																			label: "Science Enthusiasts",
+																		},
+																	]}
+																	value={
+																		demographicsSelection ??
+																		null
+																	}
+																	isMultiple
+																	onChange={function (
+																		value: SelectValue
+																	): void {
+																		value &&
+																			setDemographicsSelection(
+																				value
+																			);
+																	}}
+																	primaryColor={
+																		"teal"
+																	}
+																/>
+															</div>
 														</div>
 													</div>
-
-													<div className="col-span-full">
-														<div>
-															<label
-																htmlFor="word-count"
-																className="block text-sm font-medium leading-6 text-gray-900"
-															>
-																Number of words
-															</label>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Number of words
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																<input
+																	disabled={
+																		currentJob !==
+																		undefined
+																	}
+																	id="word-count"
+																	type="number"
+																	className="w-full px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
+																	value={
+																		wordCount
+																	}
+																	onChange={(
+																		e
+																	) => {
+																		setWordCount(
+																			parseInt(
+																				e
+																					.target
+																					.value
+																			)
+																		);
+																	}}
+																/>
+															</div>
+															<div className="mb-4 pt-2">
+																<p className="text-gray-700">
+																	Approximate
+																	Price: ${" "}
+																	{calculatePrice()}
+																</p>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Exclude this writer?
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
 															<input
 																disabled={
 																	currentJob !==
 																	undefined
 																}
-																id="word-count"
-																type="number"
-																className="w-full px-4 py-2 border rounded-md border-gray-300 focus:outline-none focus:ring focus:border-blue-300"
-																value={
-																	wordCount
-																}
-																onChange={(
-																	e
-																) => {
-																	setWordCount(
-																		parseInt(
-																			e
-																				.target
-																				.value
-																		)
-																	);
-																}}
+																id="candidates"
+																aria-describedby="candidates-description"
+																name="candidates"
+																type="checkbox"
+																className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
 															/>
-														</div>
-														<div className="mb-4">
-															<p className="text-gray-700">
-																Approximate
-																Price: ${" "}
-																{calculatePrice()}
-															</p>
-														</div>
-													</div>
-
-													{getPastReadJobDetails(
-														currentJob
-													) &&
-														getPastReadJobDetails(
-															currentJob
-														).feedback && (
-															<>
-																<div className="sm:col-span-4">
-																	<label
-																		htmlFor="comment"
-																		className="block text-md font-medium leading-6 text-gray-900"
-																	>
-																		Your
-																		feedback
-																		for this
-																		story:
-																	</label>
-																</div>
-																<div className="sm:col-span-4">
-																	<label
-																		htmlFor="project-title"
-																		className="block text-sm font-medium leading-6 text-gray-900"
-																	>
-																		Macro
-																	</label>
-																	<div className="mt-2">
-																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																			<textarea
-																				disabled
-																				value={
-																					getPastReadJobDetails(
-																						currentJob
-																					)
-																						.feedback
-																						.macro
-																				}
-																				name="project-title"
-																				id="project-title"
-																				autoComplete="project-title"
-																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																			/>
-																		</div>
-																	</div>
-																</div>
-																<div className="sm:col-span-4">
-																	<label
-																		htmlFor="project-title"
-																		className="block text-sm font-medium leading-6 text-gray-900"
-																	>
-																		Micro
-																	</label>
-																	<div className="mt-2">
-																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																			<textarea
-																				disabled
-																				value={
-																					getPastReadJobDetails(
-																						currentJob
-																					)
-																						.feedback
-																						.micro
-																				}
-																				name="project-title"
-																				id="project-title"
-																				autoComplete="project-title"
-																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																			/>
-																		</div>
-																	</div>
-																</div>
-																<div className="sm:col-span-4">
-																	<label
-																		htmlFor="project-title"
-																		className="block text-sm font-medium leading-6 text-gray-900"
-																	>
-																		Word
-																		Building
-																	</label>
-																	<div className="mt-2">
-																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																			<textarea
-																				disabled
-																				value={
-																					getPastReadJobDetails(
-																						currentJob
-																					)
-																						.feedback
-																						.wordBuilding
-																				}
-																				name="project-title"
-																				id="project-title"
-																				autoComplete="project-title"
-																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																			/>
-																		</div>
-																	</div>
-																</div>
-
-																<div className="sm:col-span-4">
-																	<label
-																		htmlFor="project-title"
-																		className="block text-sm font-medium leading-6 text-gray-900"
-																	>
-																		Story
-																		Arc
-																	</label>
-																	<div className="mt-2">
-																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																			<textarea
-																				disabled
-																				value={
-																					getPastReadJobDetails(
-																						currentJob
-																					)
-																						.feedback
-																						.storyArc
-																				}
-																				name="project-title"
-																				id="project-title"
-																				autoComplete="project-title"
-																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																			/>
-																		</div>
-																	</div>
-																</div>
-																<div className="sm:col-span-4">
-																	<label
-																		htmlFor="project-title"
-																		className="block text-sm font-medium leading-6 text-gray-900"
-																	>
-																		Characters
-																	</label>
-																	<div className="mt-2">
-																		<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
-																			<textarea
-																				disabled
-																				value={
-																					getPastReadJobDetails(
-																						currentJob
-																					)
-																						.feedback
-																						.characters
-																				}
-																				name="project-title"
-																				id="project-title"
-																				autoComplete="project-title"
-																				className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
-																			/>
-																		</div>
-																	</div>
-																</div>
-															</>
-														)}
-
-													<div className="col-span-full">
-														<div className="relative flex items-start">
-															<div className="flex h-6 items-center">
-																<input
-																	disabled
-																	id="candidates"
-																	aria-describedby="candidates-description"
-																	name="candidates"
-																	type="checkbox"
-																	className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
-																/>
-															</div>
-															<div className="ml-3 text-sm leading-6">
-																<label
-																	htmlFor="candidates"
-																	className="font-medium text-gray-900"
-																>
-																	Exclude this
-																	writer?
-																</label>
-															</div>
 														</div>
 													</div>
 												</div>
