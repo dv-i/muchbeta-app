@@ -1,7 +1,6 @@
 import { Switch } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import React, { useState } from "react";
-import ToastNotification, { ToastProps } from "./common/Toast";
 interface WriterFeedbackProps {
 	currentFeedback: any;
 	setCurrentFeedback: React.Dispatch<any>;
@@ -98,7 +97,7 @@ export const WriterFeedback = ({
 			</div>
 		);
 	};
-	const [reviews, setReviews] = useState([
+	const [reviews] = useState([
 		{
 			question: "Was this review...?",
 			review: 1,
