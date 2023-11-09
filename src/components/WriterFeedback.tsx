@@ -1,6 +1,7 @@
 import { Switch } from "@headlessui/react";
 import { StarIcon } from "@heroicons/react/20/solid";
 import React, { useState } from "react";
+import { toast } from "react-toastify";
 interface WriterFeedbackProps {
 	currentFeedback: any;
 	setCurrentFeedback: React.Dispatch<any>;
@@ -392,6 +393,16 @@ export const WriterFeedback = ({
 				{!isViewingFeedback && (
 					<button
 						onClick={() => {
+							toast.success("Submission Successful", {
+								position: "top-right",
+								autoClose: 5000,
+								hideProgressBar: false,
+								closeOnClick: true,
+								pauseOnHover: true,
+								draggable: true,
+								progress: undefined,
+								theme: "light",
+							});
 							setCurrentFeedback(undefined);
 						}}
 						className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"

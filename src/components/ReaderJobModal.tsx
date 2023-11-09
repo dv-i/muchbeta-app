@@ -7,6 +7,7 @@ import {
 	type Option,
 	type SelectValue,
 } from "react-tailwindcss-select/dist/components/type";
+import { toast } from "react-toastify";
 
 interface ReaderJobModalProps {
 	isOpen: boolean;
@@ -270,13 +271,30 @@ export const ReaderJobModal = ({
 													</button>
 													<button
 														onClick={() => {
+															toast.success(
+																"Submission Successful",
+																{
+																	position:
+																		"top-right",
+																	autoClose: 5000,
+																	hideProgressBar:
+																		false,
+																	closeOnClick:
+																		true,
+																	pauseOnHover:
+																		true,
+																	draggable:
+																		true,
+																	progress:
+																		undefined,
+																	theme: "light",
+																}
+															);
 															setIsOpen(false);
 														}}
 														className="rounded-md bg-teal-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 													>
-														{isFeedbackMode
-															? "Submit Feedback"
-															: "Accept Job"}
+														Submit Feedback
 													</button>
 												</div>
 											)}
