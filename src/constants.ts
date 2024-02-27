@@ -146,12 +146,14 @@ export const pastReads = [
 		readJob: { name: "The Catcher in the Rye" },
 		date: "1d ago",
 		feedback: {
-			macro: "The overall story structure is solid, but it could benefit from more suspense and unexpected twists.",
-			micro: "I found some minor grammatical errors and typos that need editing.",
-			wordBuilding: "The world you've created is vivid and immersive.",
+			macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
+			micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
+			wordBuilding:
+				"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
 			storyArc:
-				"The plot progression is engaging and keeps the reader hooked.",
-			characters: "The characters are well-developed and relatable.",
+				"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
+			characters:
+				"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
 		},
 
 		// dateTime: "2023-01-23T10:32",

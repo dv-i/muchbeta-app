@@ -85,7 +85,7 @@ export default function Login(): JSX.Element {
 						href="#"
 						className="font-semibold leading-6 text-teal-600 hover:text-teal-500"
 					>
-						Start a 14 day free trial
+						Join us!
 					</a>
 				</p>
 			</div>

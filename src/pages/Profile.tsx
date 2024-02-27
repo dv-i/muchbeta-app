@@ -66,7 +66,9 @@ export default function Example(): JSX.Element {
 							Personal Information
 						</h2>
 						<p className="mt-1 text-sm leading-6 text-gray-500">
-							Use a permanent address where you can receive mail.
+							Your personal name will be kept confidential and
+							will not appear on your public profile. All
+							interactions on our platform are anonymous.
 						</p>
 					</div>
 
@@ -105,7 +107,7 @@ export default function Example(): JSX.Element {
 										id="first-name"
 										autoComplete="given-name"
 										disabled
-										value={"Julia"}
+										value={"Squirmy"}
 										className="block w-full rounded-md border-0 bg-teal-600/10 py-1.5 text-gray-400 shadow-sm ring-1 ring-inset ring-teal-600/20 focus:ring-2 focus:ring-inset focus:ring-teal-500 sm:text-sm sm:leading-6"
 									/>
 								</div>
@@ -124,7 +126,7 @@ export default function Example(): JSX.Element {
 										name="last-name"
 										id="last-name"
 										disabled
-										value={"Durnin"}
+										value={"Wormy"}
 										autoComplete="family-name"
 										className="block w-full rounded-md border-0 bg-teal-600/10 py-1.5 text-gray-400 shadow-sm ring-1 ring-inset ring-teal-600/20 focus:ring-2 focus:ring-inset focus:ring-teal-500 sm:text-sm sm:leading-6"
 									/>
@@ -143,7 +145,7 @@ export default function Example(): JSX.Element {
 										id="email"
 										name="email"
 										type="email"
-										value={"juliadurnin@gmail.com"}
+										value={"squirmy@muchbeta.org"}
 										disabled
 										autoComplete="email"
 										className="block w-full rounded-md border-0 bg-teal-600/10 py-1.5 text-gray-400 shadow-sm ring-1 ring-inset ring-teal-600/20 focus:ring-2 focus:ring-inset focus:ring-teal-500 sm:text-sm sm:leading-6"
@@ -160,17 +162,13 @@ export default function Example(): JSX.Element {
 								</label>
 								<div className="mt-2">
 									<div className="flex rounded-md bg-teal-600/10 ring-1 ring-inset ring-teal-600/20 focus-within:ring-2 focus-within:ring-inset focus-within:ring-teal-500">
-										<span className="flex select-none items-center pl-3 text-gray-500 sm:text-sm">
-											example.com/
-										</span>
 										<input
 											type="text"
 											name="userid"
 											id="userid"
 											autoComplete="userid"
-											value={"jdurnin"}
-											className="flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-500 focus:ring-0 sm:text-sm sm:leading-6"
-											placeholder="janesmith"
+											value={"squirmywormy"}
+											className="block w-full rounded-md border-0 bg-teal-600/10 py-1.5 text-gray-400 shadow-sm ring-1 ring-inset ring-teal-600/20 focus:ring-2 focus:ring-inset focus:ring-teal-500 sm:text-sm sm:leading-6"
 										/>
 									</div>
 								</div>
@@ -190,9 +188,25 @@ export default function Example(): JSX.Element {
 										className="block w-full rounded-md border-0 bg-teal-600/10 py-1.5 text-gray-500 shadow-sm ring-1 ring-inset ring-teal-600/20 focus:ring-2 focus:ring-inset focus:ring-teal-500 sm:text-sm sm:leading-6 [&_*]:text-black"
 									>
 										<option>New York</option>
-										<option>Torronto</option>
+										<option>Toronto</option>
 										<option>London</option>
 									</select>
+								</div>
+							</div>
+							<div className="col-span-full">
+								<label
+									htmlFor="dob"
+									className="block text-sm font-medium leading-6 text-gray-700"
+								>
+									Date of birth
+								</label>
+								<div className="mt-2">
+									<input
+										type="date"
+										name="dob"
+										id="dob"
+										className="block w-full rounded-md border-0 bg-teal-600/10 py-1.5 text-gray-400 shadow-sm ring-1 ring-inset ring-teal-600/20 focus:ring-2 focus:ring-inset focus:ring-teal-500 sm:text-sm sm:leading-6"
+									/>
 								</div>
 							</div>
 						</div>
@@ -212,10 +226,10 @@ export default function Example(): JSX.Element {
 							Genre Preferences
 						</h2>
 						<p className="mt-1 text-sm leading-6 text-gray-500">
-							Unlock a world of curated content by sharing your
-							favorite genre! Let us transform your preferences
-							into a personalized content experience using our
-							cutting-edge algorithms.
+							Choose your preferred genres to read as a beta
+							reader. This helps us match you with books you're
+							most likely to enjoy and provide valuable feedback
+							on.
 						</p>
 					</div>
 

@@ -108,7 +108,7 @@ export function SponsorAD(): JSX.Element {
 						<div className="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:text-left">
 							<h1>
 								<span className="block text-base font-semibold text-gray-500 sm:text-lg lg:text-base xl:text-lg">
-									Sponser Advertisement
+									Sponsor Advertisement
 								</span>
 								<span className="mt-1 block text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl">
 									<span className="block text-gray-900">
@@ -121,14 +121,10 @@ export function SponsorAD(): JSX.Element {
 								</span>
 							</h1>
 							<p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-								Elevate every moment with{" "}
-								<span className="text-teal-600 font-semibold">
-									{" "}
-									Sponser
-								</span>
-								, where adventure knows no bounds. Unleash your
-								potential today! and embark on a limitless
-								journey of possibilities.
+								Showcase your brand with Muchbeta. Our platform
+								offers a unique opportunity for your business to
+								connect with an engaged, literary-minded
+								audience.
 							</p>
 						</div>
 						<div className="relative mt-12 sm:mx-auto sm:max-w-lg lg:col-span-6 lg:mx-0 lg:mt-0 lg:flex lg:max-w-none lg:items-center">
@@ -220,10 +216,18 @@ export function PromotionSection(): JSX.Element {
 		<div className="bg-teal-700">
 			<div className="relative isolate">
 				<div className="mx-auto max-w-7xl sm:px-6 lg:px-8 pb-4 px-4">
-					<h1 className="py-6 text-3xl font-bold tracking-tight text-white sm:text-4xl">
+					<h1 className="text-center py-6 text-3xl font-bold tracking-tight text-white sm:text-4xl">
 						Authors Promotion
+						<p className="mt-3 text-base text-white sm:mt-5 sm:text-xl lg:text-lg xl:text-3xl">
+							Your Title Here!
+						</p>
+						<p className="font-normal max-w-xl mx-auto text-base text-white sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
+							Showcase your finished projects that have been honed
+							by the Muchbeta community and connect directly with
+							your audience.
+						</p>
 					</h1>
-					<div className="mx-auto flex rounded-3xl max-w-2xl flex-col gap-16 bg-white/5 px-6 py-8 ring-1 ring-white/10 sm:rounded-3xl sm:p-8 lg:mx-0 lg:max-w-none lg:flex-row lg:items-center lg:py-20 xl:gap-x-20 xl:px-20">
+					<div className="mt-5 mx-auto flex rounded-3xl max-w-2xl flex-col gap-16 bg-white/5 px-6 py-8 ring-1 ring-white/10 sm:rounded-3xl sm:p-8 lg:mx-0 lg:max-w-none lg:flex-row lg:items-center lg:py-20 xl:gap-x-20 xl:px-20">
 						<div className="w-full">
 							<div
 								className="relative h-full w-full flex align-middle justify-center"
@@ -322,9 +326,7 @@ export function PollSection(): JSX.Element {
 						Poll
 					</h1>
 					<p className="mt-6 text-xl leading-8 text-gray-700">
-						Which feature is most crucial for your ideal
-						writing/reading app: seamless synchronization across
-						devices or a vast library of diverse content?
+						"What excites you most about Muchbeta?"
 					</p>
 				</div>
 				<Poll />
@@ -336,33 +338,21 @@ export function PollSection(): JSX.Element {
 const plans = [
 	{
 		heading: "Seamless",
-		description: "Seamless synchronization across devices",
+		description: "Receiving helpful, actionable feedback.",
 		disk: "160 GB SSD disk",
 		price: "$40",
 	},
 	{
 		heading: "Library",
-		description: "Vast library of diverse content",
+		description: "Staying motivated to meet monthly writing goals.",
 		disk: "256 GB SSD disk",
 		price: "$80",
 	},
 	{
 		heading: "Both",
-		description: "Both features are equally important",
+		description: "Earning by beta reading.",
 		disk: "512 GB SSD disk",
 		price: "$160",
-	},
-	{
-		heading: "Niether",
-		description: "Neither feature is a priority for me",
-		disk: "1024 GB SSD disk",
-		price: "$240",
-	},
-	{
-		heading: "Other",
-		description: "I'm not sure / It depends",
-		disk: "1024 GB SSD disk",
-		price: "$240",
 	},
 ];
 

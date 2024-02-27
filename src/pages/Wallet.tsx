@@ -10,6 +10,7 @@ import {
 	PencilSquareIcon,
 	BanknotesIcon,
 	CreditCardIcon,
+	ArrowDownCircleIcon,
 } from "@heroicons/react/20/solid";
 import VisaIcon from "../assets/visa.png";
 import MasterIcon from "../assets/master.png";
@@ -22,7 +23,7 @@ const secondaryNavigation = [
 const stats = [
 	{
 		name: "Total Balance",
-		value: "$4,091.00",
+		value: "$653.00",
 		change: "+10.75%",
 		changeType: "positive",
 	},
@@ -52,10 +53,10 @@ const days = [
 				id: 1,
 				invoiceNumber: "00012",
 				href: "#",
-				amount: "$1,600.00 USD",
-				tax: "$500.00",
+				amount: "59.00 USD",
+				tax: "$5.9.00",
 				status: "Reader",
-				client: "Whispers of Autumn",
+				client: "UPI-R-20240115-003",
 				description:
 					"A collection of poignant haikus capturing the fleeting beauty of fall.",
 				icon: ArrowUpCircleIcon,
@@ -64,7 +65,7 @@ const days = [
 				id: 2,
 				invoiceNumber: "00011",
 				href: "#",
-				amount: "$3,000.00 USD",
+				amount: "$42.00 USD",
 				status: "Withdraw",
 				client: "J.P Morgan",
 				description: "XXXX 3076",
@@ -74,13 +75,13 @@ const days = [
 				id: 3,
 				invoiceNumber: "00009",
 				href: "#",
-				amount: "$1,091.00 USD",
-				tax: "$130.00",
+				amount: "$96.00 USD",
+				tax: "$9.6.00",
 				status: "Writer",
-				client: "Dreambound",
+				client: "UPI-W-20240115-002",
 				description:
 					" A novella about a young artist's journey through a surreal dreamscape in search of inspiration.",
-				icon: ArrowUpCircleIcon,
+				icon: ArrowDownCircleIcon,
 			},
 		],
 	},
@@ -92,10 +93,10 @@ const days = [
 				id: 4,
 				invoiceNumber: "00010",
 				href: "#",
-				amount: "$1,400.00 USD",
-				tax: "$90.00",
+				amount: "$5.00 USD",
+				tax: "$0.5",
 				status: "Reader",
-				client: "Slices of Sunshine",
+				client: "UPI-W-20240114-001",
 				description:
 					"An illustrated book featuring heartwarming short stories that celebrate the simple joys of life.",
 				icon: ArrowUpCircleIcon,
@@ -106,7 +107,7 @@ const days = [
 const clients = [
 	{
 		id: 1,
-		name: "Julia Durnin",
+		name: "Squirmy Wormy",
 		imageUrl: VisaIcon,
 		lastInvoice: {
 			date: "08 / 2028",
@@ -117,7 +118,7 @@ const clients = [
 	},
 	{
 		id: 2,
-		name: "Julia Durnin",
+		name: "Squirmy Wormy",
 		imageUrl: MasterIcon,
 		lastInvoice: {
 			date: "04 / 2025",
@@ -128,7 +129,7 @@ const clients = [
 	},
 	{
 		id: 3,
-		name: "Julia Durnin",
+		name: "Squirmy Wormy",
 		imageUrl: VisaIcon,
 		lastInvoice: {
 			date: "01 / 2027",
@@ -286,7 +287,10 @@ export default function Example(): JSX.Element {
 																			transaction.status ===
 																				"Withdraw"
 																				? "text-blue-400"
-																				: "text-teal-400"
+																				: transaction.status ===
+																				  "Reader"
+																				? "text-teal-400"
+																				: "text-red-500"
 																		)}
 																		aria-hidden="true"
 																	/>

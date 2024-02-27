@@ -389,15 +389,14 @@ export function News(): JSX.Element {
 						News / Updates
 					</h2>
 					<p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-						Exciting News for Community
+						A Special Thanks to Our Supporters
 					</p>
 					<p className="mt-6 text-base leading-7 text-gray-300">
-						Dive into a new chapter of reading with our latest
-						update, delivering a fresh and engaging experience that
-						connects book lovers worldwide. Explore enhanced
-						features, discover new authors, and connect with fellow
-						readers who share your passion, all in one vibrant
-						community.
+						As we unveil Muchbeta in its soft launch phase, we
+						extend our heartfelt gratitude to you, our pioneering
+						supporters. Your belief in our vision has brought us to
+						this pivotal moment, and we're thrilled to grant you
+						exclusive early access to the platform.
 					</p>
 					<div className="mt-8">
 						<a
