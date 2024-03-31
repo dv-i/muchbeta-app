@@ -1,5 +1,5 @@
 import { Transition, Dialog } from "@headlessui/react";
-import { BookOpenIcon } from "@heroicons/react/20/solid";
+import { BookOpenIcon, StarIcon } from "@heroicons/react/20/solid";
 import React, { Fragment, useState } from "react";
 import { PRICE_PER_WORD, projects } from "../constants";
 import type { Project } from "../interfaces";
@@ -9,111 +9,7 @@ import {
 	type SelectValue,
 } from "react-tailwindcss-select/dist/components/type";
 import { WriterFeedback } from "./WriterFeedback";
-
-const people = [
-	{
-		name: "Leslie Alexander",
-		email: "leslie.alexander@example.com",
-		imageUrl:
-			"https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-		href: "#",
-		feedback: {
-			macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
-			micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
-			wordBuilding:
-				"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
-			storyArc:
-				"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
-			characters:
-				"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
-		},
-	},
-	{
-		name: "Michael Foster",
-		email: "michael.foster@example.com",
-		imageUrl:
-			"https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-		href: "#",
-		feedback: {
-			macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
-			micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
-			wordBuilding:
-				"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
-			storyArc:
-				"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
-			characters:
-				"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
-		},
-	},
-	{
-		name: "Dries Vincent",
-		email: "dries.vincent@example.com",
-		imageUrl:
-			"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-		href: "#",
-		feedback: {
-			macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
-			micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
-			wordBuilding:
-				"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
-			storyArc:
-				"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
-			characters:
-				"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
-		},
-	},
-	{
-		name: "Lindsay Walton",
-		email: "lindsay.walton@example.com",
-		imageUrl:
-			"https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-		href: "#",
-		feedback: {
-			macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
-			micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
-			wordBuilding:
-				"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
-			storyArc:
-				"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
-			characters:
-				"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
-		},
-	},
-	{
-		name: "Courtney Henry",
-		email: "courtney.henry@example.com",
-		imageUrl:
-			"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-		href: "#",
-		feedback: {
-			macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
-			micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
-			wordBuilding:
-				"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
-			storyArc:
-				"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
-			characters:
-				"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
-		},
-	},
-	{
-		name: "Tom Cook",
-		email: "tom.cook@example.com",
-		imageUrl:
-			"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
-		href: "#",
-		feedback: {
-			macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
-			micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
-			wordBuilding:
-				"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
-			storyArc:
-				"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
-			characters:
-				"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
-		},
-	},
-];
+import { classNames } from "../utils";
 
 interface WriterProjectModalProps {
 	isOpen: boolean;
@@ -144,6 +40,129 @@ export const WriterProjectModal = ({
 	const [projectTitle] = useState<string>(
 		getProjectDetails(currentProject)?.title || ""
 	);
+
+	const [people, setPeople] = useState([
+		{
+			index: 3,
+			name: "Dries Vincent",
+			email: "dries.vincent@example.com",
+			imageUrl:
+				"https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+			href: "#",
+			feedback: {
+				macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
+				micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
+				wordBuilding:
+					"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
+				storyArc:
+					"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
+				characters:
+					"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
+			},
+			submittedOn: "22nd Feb 2024",
+			isFavorite: true,
+		},
+		{
+			index: 6,
+			name: "Tom Cook",
+			email: "tom.cook@example.com",
+			imageUrl:
+				"https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+			href: "#",
+			feedback: {
+				macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
+				micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
+				wordBuilding:
+					"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
+				storyArc:
+					"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
+				characters:
+					"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
+			},
+			submittedOn: "18th Jan 2024",
+			isFavorite: false,
+		},
+		{
+			index: 2,
+			name: "Michael Foster",
+			email: "michael.foster@example.com",
+			imageUrl:
+				"https://images.unsplash.com/photo-1519244703995-f4e0f30006d5?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+			href: "#",
+			feedback: {
+				macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
+				micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
+				wordBuilding:
+					"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
+				storyArc:
+					"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
+				characters:
+					"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
+			},
+			submittedOn: "12th Dec 2023",
+			isFavorite: true,
+		},
+		{
+			index: 4,
+			name: "Lindsay Walton",
+			email: "lindsay.walton@example.com",
+			imageUrl:
+				"https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+			href: "#",
+			feedback: {
+				macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
+				micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
+				wordBuilding:
+					"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
+				storyArc:
+					"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
+				characters:
+					"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
+			},
+			submittedOn: "3rd Jun 2023",
+			isFavorite: false,
+		},
+		{
+			index: 5,
+			name: "Courtney Henry",
+			email: "courtney.henry@example.com",
+			imageUrl:
+				"https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+			href: "#",
+			feedback: {
+				macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
+				micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
+				wordBuilding:
+					"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
+				storyArc:
+					"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
+				characters:
+					"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
+			},
+			submittedOn: "10th May 2023",
+			isFavorite: false,
+		},
+		{
+			index: 1,
+			name: "Leslie Alexander",
+			email: "leslie.alexander@example.com",
+			imageUrl:
+				"https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80",
+			href: "#",
+			feedback: {
+				macro: "The story clearly has a beginning, middle, and end, which is great. I found myself wondering what might happen next, which made me think that a bit more unpredictability could be intriguing. There are parts where I could almost guess what was coming, and I think it would be amazing to be surprised a few more times.",
+				micro: "Sometimes I stumbled over sentences that seemed a bit complex or didn’t flow as well with the story. It might be worth taking another look at those. Also, there were moments when characters acted in ways that puzzled me because it seemed different from their usual behavior. Plus, there are scenes that felt less connected to the main story, which got me thinking about their importance.",
+				wordBuilding:
+					"The world in your book is vivid and easy to picture, which I loved. The details made me feel like I was right there. If there were more sensory descriptions, I bet it would be even more engaging. The places already have such strong imagery that I'm curious about the other senses, too.",
+				storyArc:
+					"The plot kept me interested and wanting to read on, which is a strong point. The chapters flow into each other well, maintaining interest. I did notice that some solutions to problems seemed to come about quickly, and it made me pause and think back on the events leading up to them.",
+				characters:
+					"The characters are compelling, and their unique traits shine through, which made me care about what happens to them. At times, I was curious about their thought processes, especially when they faced challenges. Seeing more of how they deal with things internally could add even more depth to their personalities.",
+			},
+			submittedOn: "16th Mar 2023",
+			isFavorite: false,
+		},
+	]);
 
 	const [genrePreferences, setGenrePreferences] = useState<Option | Option[]>(
 		currentProject
@@ -191,6 +210,17 @@ export const WriterProjectModal = ({
 			  ]
 			: []
 	);
+
+	const toggleFavorite = (index: number): void => {
+		setPeople((prevPeople) => {
+			return prevPeople.map((person) => {
+				if (person.index === index) {
+					return { ...person, isFavorite: !person.isFavorite };
+				}
+				return person;
+			});
+		});
+	};
 
 	const calculatePrice = (): number => {
 		return Math.ceil(
@@ -576,34 +606,48 @@ export const WriterProjectModal = ({
 						role="list"
 						className="divide-y divide-gray-100 h-96 overflow-y-scroll"
 					>
-						{people.map((person) => (
+						{people.map((person: any) => (
 							<li
 								key={person.email}
 								className="flex items-center justify-between gap-x-6 py-5"
 							>
 								<div className="flex min-w-0 gap-x-4">
-									<img
+									{/* <img
 										className="h-12 w-12 flex-none rounded-full bg-gray-50"
 										src={person.imageUrl}
 										alt=""
-									/>
+									/> */}
 									<div className="min-w-0 flex-auto">
 										<p className="text-sm font-semibold leading-6 text-gray-900">
-											{person.name}
+											Beta Reader Feedback #{person.index}
 										</p>
 										<p className="mt-1 truncate text-xs leading-5 text-gray-500">
-											{person.email}
+											{person.submittedOn}
 										</p>
 									</div>
 								</div>
-								<button
-									onClick={() => {
-										setCurrentFeedback(person);
-									}}
-									className="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
-								>
-									View
-								</button>
+								<div className="flex">
+									<StarIcon
+										onClick={() => {
+											toggleFavorite(person.index);
+										}}
+										className={classNames(
+											person.isFavorite
+												? "text-yellow-400"
+												: "text-gray-200",
+											"h-5 w-5 flex-shrink-0 cursor-pointer mr-1"
+										)}
+										aria-hidden="true"
+									/>
+									<button
+										onClick={() => {
+											setCurrentFeedback(person);
+										}}
+										className="rounded-full bg-white px-2.5 py-1 text-xs font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+									>
+										View
+									</button>
+								</div>
 							</li>
 						))}
 					</ul>

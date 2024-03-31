@@ -14,6 +14,7 @@ import {
 } from "@heroicons/react/20/solid";
 import VisaIcon from "../assets/visa.png";
 import MasterIcon from "../assets/master.png";
+import { classNames } from "../utils";
 
 const secondaryNavigation = [
 	{ name: "Last 7 days", href: "#", current: true },
@@ -139,10 +140,6 @@ const clients = [
 		},
 	},
 ];
-
-function classNames(...classes: string[]): string {
-	return classes.filter(Boolean).join(" ");
-}
 
 export default function Example(): JSX.Element {
 	return (

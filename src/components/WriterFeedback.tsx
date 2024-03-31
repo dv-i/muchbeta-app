@@ -1,15 +1,13 @@
 import { Switch } from "@headlessui/react";
-import { StarIcon } from "@heroicons/react/20/solid";
-import React, { useState } from "react";
+import { StarIcon, FlagIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
+import { classNames } from "../utils";
 interface WriterFeedbackProps {
 	currentFeedback: any;
 	setCurrentFeedback: React.Dispatch<any>;
 }
 
-function classNames(...classes: any): string {
-	return classes.filter(Boolean).join(" ");
-}
 export const WriterFeedback = ({
 	currentFeedback,
 	setCurrentFeedback,
@@ -20,6 +18,11 @@ export const WriterFeedback = ({
 	const [review4, setReview4] = useState(0);
 	const [review5, setReview5] = useState(0);
 	const [isViewingFeedback, setIsViewingFeedback] = useState(true);
+	const [tabs, setTabs] = useState([
+		{ name: "View Feedback", current: true },
+		{ name: "Submit Feedback", current: false },
+	]);
+
 	const renderReviewWidget = (reviewNumber: number): JSX.Element => {
 		const getCurrentRating = (reviewNumber: number): number => {
 			switch (reviewNumber) {
@@ -98,37 +101,90 @@ export const WriterFeedback = ({
 			</div>
 		);
 	};
+
+	useEffect(() => {
+		setTabs((prevTabs) => {
+			return prevTabs.map((tab) => {
+				if (tab.name === "View Feedback") {
+					return {
+						...tab,
+						name: "View Feedback",
+						current: isViewingFeedback,
+					};
+				} else {
+					return {
+						...tab,
+						name: "Submit Feedback",
+						current: !isViewingFeedback,
+					};
+				}
+			});
+		});
+	}, [isViewingFeedback]);
 	const [reviews] = useState([
 		{
-			question: "Was this review...?",
+			question: "Critical Analysis",
 			review: 1,
 			reviewState: review1,
 		},
 		{
-			question: "Did the reader...?",
+			question: "Sticking to the Brief",
 			review: 2,
 			reviewState: review2,
 		},
 		{
-			question: "Was this...?",
+			question: "Respectfulness",
 			review: 3,
 			reviewState: review3,
-		},
-		{
-			question: "Review put...",
-			review: 4,
-			reviewState: review4,
-		},
-		{
-			question: "Reader is...",
-			review: 5,
-			reviewState: review5,
 		},
 	]);
 	return (
 		<>
 			<div className="sm:col-span-4">
-				<Switch.Group as="div" className="flex items-center">
+				<div>
+					<div className="sm:hidden">
+						<label htmlFor="tabs" className="sr-only">
+							Select a tab
+						</label>
+						{/* Use an "onChange" listener to redirect the user to the selected tab URL. */}
+						<select
+							id="tabs"
+							name="tabs"
+							className="block w-full rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
+							defaultValue={tabs.find((tab) => tab.current)?.name}
+						>
+							{tabs.map((tab) => (
+								<option key={tab.name}>{tab.name}</option>
+							))}
+						</select>
+					</div>
+					<div className="hidden sm:block">
+						<nav className="flex space-x-4" aria-label="Tabs">
+							{tabs.map((tab) => (
+								<span
+									key={tab.name}
+									className={classNames(
+										tab.current
+											? "bg-teal-100 text-gray-700"
+											: "text-gray-500 hover:text-gray-700",
+										"rounded-md px-3 py-2 text-sm font-medium cursor-pointer"
+									)}
+									aria-current={
+										tab.current ? "page" : undefined
+									}
+									onClick={() => {
+										setIsViewingFeedback(
+											tab.name === "View Feedback"
+										);
+									}}
+								>
+									{tab.name}
+								</span>
+							))}
+						</nav>
+					</div>
+				</div>
+				{/* <Switch.Group as="div" className="flex items-center">
 					<Switch
 						checked={isViewingFeedback}
 						onChange={setIsViewingFeedback}
@@ -154,7 +210,7 @@ export const WriterFeedback = ({
 								: "Submit feedback for Beta Reader"}
 						</span>{" "}
 					</Switch.Label>
-				</Switch.Group>
+				</Switch.Group> */}
 				<div className="flex gap-20 pt-4">
 					{isViewingFeedback ? (
 						<div className="flex-1 ">
@@ -162,7 +218,8 @@ export const WriterFeedback = ({
 								htmlFor="project-title"
 								className="block text-md font-medium leading-6 text-gray-900 pb-4"
 							>
-								Viewing feedback from {currentFeedback.name}:
+								Viewing feedback from Beta Reader #
+								{currentFeedback.index}:
 							</label>
 							<div className="mt-10 space-y-8 border-b border-gray-900/10 pb-12 sm:space-y-0 sm:divide-y sm:divide-gray-900/10 sm:border-t sm:pb-0">
 								<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -327,7 +384,7 @@ export const WriterFeedback = ({
 										htmlFor="username"
 										className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
 									>
-										Review for this reader
+										Additional notes
 									</label>
 									<div className="mt-2 sm:col-span-2 sm:mt-0">
 										<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
@@ -336,17 +393,30 @@ export const WriterFeedback = ({
 												id="project-title"
 												autoComplete="project-title"
 												className="block flex-1 border-0 bg-transparent py-1.5 pl-1 text-gray-900 placeholder:text-gray-400 focus:ring-0 sm:text-sm sm:leading-6"
+												value={
+													"Thanks for your insights—they really got me thinking on how to improve. I wish we could've dug a bit deeper on the character stuff, but overall, I found your feedback really useful. Much appreciated!"
+												}
 											/>
 										</div>
 									</div>
 								</div>
 								<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-									<label
-										htmlFor="username"
-										className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
-									>
-										Report this review?
-									</label>
+									<div className="flex">
+										<label
+											htmlFor="username"
+											className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+										>
+											Report this review?{" "}
+										</label>
+										<div className="flex items-center ml-1">
+											<FlagIcon
+												height={16}
+												width={16}
+												color="red"
+											/>
+										</div>
+									</div>
+
 									<div className="mt-2 sm:col-span-2 sm:mt-0">
 										<input
 											id="candidates"
@@ -358,12 +428,22 @@ export const WriterFeedback = ({
 									</div>
 								</div>
 								<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
-									<label
-										htmlFor="username"
-										className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
-									>
-										Exclude this Beta Reader?
-									</label>
+									<div className="flex">
+										<label
+											htmlFor="username"
+											className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+										>
+											Exclude this Beta Reader?
+										</label>
+										<div className="flex items-end ml-1">
+											<XMarkIcon
+												height={24}
+												width={24}
+												color="red"
+											/>
+										</div>
+									</div>
+
 									<div className="mt-2 sm:col-span-2 sm:mt-0">
 										<input
 											id="candidates"

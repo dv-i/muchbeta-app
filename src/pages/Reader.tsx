@@ -8,12 +8,8 @@ import { NavLink } from "react-router-dom";
 import { ReaderJobModal } from "../components/ReaderJobModal";
 import { readerData } from "../constants";
 import { Menu, Transition } from "@headlessui/react";
-import { calculatePrice } from "../utils";
+import { calculatePrice, classNames } from "../utils";
 import { News } from "./Writer";
-
-function classNames(...classes: string[]): string {
-	return classes.filter(Boolean).join(" ");
-}
 
 export default function Example(): JSX.Element {
 	const [jobModaIsOpen, setJobModalIsOpen] = useState<boolean>(false);

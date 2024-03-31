@@ -9,12 +9,9 @@ import {
 import { NavLink } from "react-router-dom";
 import { projects } from "../constants";
 import { WriterProjectModal } from "../components/WriterProjectModal";
+import { classNames } from "../utils";
 
 const pinnedProjects = projects.filter((project) => project.pinned);
-
-function classNames(...classes: string[]): string {
-	return classes.filter(Boolean).join(" ");
-}
 
 export default function Example(): JSX.Element {
 	const [projectModaIsOpen, setProjectModalIsOpen] = useState<boolean>(false);

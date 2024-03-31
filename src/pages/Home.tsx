@@ -5,6 +5,7 @@ import { RadioGroup } from "@headlessui/react";
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-expect-error
 import ReactCardCarousel from "react-card-carousel";
+import { classNames } from "../utils";
 
 function Home(): JSX.Element {
 	return (
@@ -355,10 +356,6 @@ const plans = [
 		price: "$160",
 	},
 ];
-
-function classNames(...classes: string[]): string {
-	return classes.filter(Boolean).join(" ");
-}
 
 export function Poll(): JSX.Element {
 	const [selected, setSelected] = useState(plans[0]);
