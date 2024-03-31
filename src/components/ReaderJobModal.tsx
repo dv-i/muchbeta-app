@@ -547,15 +547,6 @@ export const ReaderJobModal = ({
 																	}}
 																/>
 															</div>
-															<div className="mb-4 pt-2">
-																<p className="text-gray-700">
-																	Approximate
-																	Price: ${" "}
-																	{calculatePrice(
-																		wordCount
-																	)}
-																</p>
-															</div>
 														</div>
 													</div>
 													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
@@ -571,6 +562,41 @@ export const ReaderJobModal = ({
 															<div className="mb-4 pt-2">
 																<p className="text-gray-700">
 																	5 hours
+																</p>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Number of Beta
+															Readers to hire
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="mb-4 pt-2">
+																<p className="text-gray-700">
+																	3
+																</p>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
+															Total project price
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="mb-4 pt-2">
+																<p className="text-gray-700">
+																	${" "}
+																	{calculatePrice(
+																		wordCount,
+																		3
+																	)}
 																</p>
 															</div>
 														</div>

@@ -225,7 +225,8 @@ export default function Example(): JSX.Element {
 												<td className="py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700">
 													$
 													{calculatePrice(
-														item.wordCount
+														item.wordCount,
+														3
 													)}
 												</td>
 											</tr>

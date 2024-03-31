@@ -7,7 +7,11 @@ import {
 	type SelectValue,
 } from "react-tailwindcss-select/dist/components/type";
 import { classNames } from "../utils";
-import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/20/solid";
+import {
+	ArrowUpIcon,
+	ArrowDownIcon,
+	BanknotesIcon,
+} from "@heroicons/react/20/solid";
 
 const secondaryNavigation = [
 	{ name: "Account", href: "#", current: true },
@@ -151,6 +155,47 @@ export default function Example(): JSX.Element {
 								</div>
 							))}
 						</dl>
+					</div>
+				</div>
+
+				{/* Priority tokens */}
+				<div className="grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+					<div>
+						<h2 className="text-base font-semibold leading-7 text-gray-700">
+							Your priority tokens
+						</h2>
+						<p className="mt-1 text-sm leading-6 text-gray-500">
+							Priority tokens allow you to accept projects before
+							they are open to other users on the platform.
+						</p>
+					</div>
+					<div className="relative overflow-hidden rounded-lg bg-white px-4 pb-12 pt-5 shadow sm:px-6 sm:pt-6">
+						<dt>
+							<div className="absolute rounded-md bg-indigo-500 p-3">
+								<BanknotesIcon
+									className="h-6 w-6 text-white"
+									aria-hidden="true"
+								/>
+							</div>
+							<p className="ml-16 truncate text-sm font-medium text-gray-500">
+								{"Priority tokens"}
+							</p>
+						</dt>
+						<dd className="ml-16 flex items-baseline pb-6 sm:pb-7">
+							<p className="text-2xl font-semibold text-gray-900">
+								{200}
+							</p>
+							<div className="absolute inset-x-0 bottom-0 bg-gray-50 px-4 py-4 sm:px-6">
+								<div className="text-sm">
+									<a
+										href="#"
+										className="font-medium text-indigo-600 hover:text-indigo-500"
+									>
+										Buy more
+									</a>
+								</div>
+							</div>
+						</dd>
 					</div>
 				</div>
 

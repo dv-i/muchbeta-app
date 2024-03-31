@@ -1,7 +1,7 @@
 import { Transition, Dialog } from "@headlessui/react";
 import { BookOpenIcon, StarIcon } from "@heroicons/react/20/solid";
 import React, { Fragment, useEffect, useState } from "react";
-import { PRICE_PER_WORD, projects } from "../constants";
+import { projects } from "../constants";
 import type { Project } from "../interfaces";
 import Select from "react-tailwindcss-select";
 import {
@@ -9,7 +9,7 @@ import {
 	type SelectValue,
 } from "react-tailwindcss-select/dist/components/type";
 import { WriterFeedback } from "./WriterFeedback";
-import { classNames } from "../utils";
+import { calculatePrice, classNames } from "../utils";
 
 interface WriterProjectModalProps {
 	isOpen: boolean;
@@ -224,15 +224,8 @@ export const WriterProjectModal = ({
 		});
 	};
 
-	const calculatePrice = (): number => {
-		const price = Math.ceil(
-			wordCount * PRICE_PER_WORD * (1 + numberOfBetaReaders * 0.1)
-		);
-		return !isNaN(price) ? price : 0;
-	};
-
 	useEffect(() => {
-		setTotalPrice(calculatePrice());
+		setTotalPrice(calculatePrice(wordCount, numberOfBetaReaders));
 	}, [numberOfBetaReaders, wordCount]);
 
 	const renderRegularFields = (): JSX.Element => {
@@ -519,11 +512,6 @@ export const WriterProjectModal = ({
 										setWordCount(parseInt(e.target.value));
 									}}
 								/>
-							</div>
-							<div className="mb-4 pt-2">
-								<p className="text-gray-700">
-									Approximate Price: $ {totalPrice}
-								</p>
 							</div>
 						</div>
 					</div>
