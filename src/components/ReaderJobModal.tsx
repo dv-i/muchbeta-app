@@ -1,6 +1,6 @@
 import { Transition, Dialog } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
-import { PRICE_PER_WORD, matches, pastReads } from "../constants";
+import { readerData } from "../constants";
 import type { Job } from "../interfaces";
 import Select from "react-tailwindcss-select";
 import {
@@ -8,6 +8,7 @@ import {
 	type SelectValue,
 } from "react-tailwindcss-select/dist/components/type";
 import { toast } from "react-toastify";
+import { calculatePrice } from "../utils";
 
 interface ReaderJobModalProps {
 	isOpen: boolean;
@@ -15,11 +16,7 @@ interface ReaderJobModalProps {
 	currentJob?: string;
 }
 const getJobDetails = (jobTitle: string | undefined): Job => {
-	return matches.find((job) => job.title === jobTitle) as Job;
-};
-
-const getPastReadJobDetails = (jobTitle: string | undefined): any => {
-	return pastReads.find((job) => job.readJob.name === jobTitle);
+	return readerData.find((job) => job.title === jobTitle) as Job;
 };
 
 export const ReaderJobModal = ({
@@ -34,12 +31,6 @@ export const ReaderJobModal = ({
 	const [jobTitle] = useState<string>(getJobDetails(currentJob)?.title || "");
 
 	const [isFeedbackMode, setIsFeedbackMode] = useState<boolean>(false);
-
-	const calculatePrice = (): number => {
-		return Math.ceil(
-			wordCount && wordCount > 0 ? wordCount * PRICE_PER_WORD : 0
-		);
-	};
 
 	const [genrePreferences, setGenrePreferences] = useState<Option | Option[]>(
 		[
@@ -258,8 +249,8 @@ export const ReaderJobModal = ({
 										</div>
 
 										{currentJob &&
-											getPastReadJobDetails(currentJob)
-												?.type !== "completed" && (
+											getJobDetails(currentJob)
+												?.status !== "completed" && (
 												<div className="mt-6 flex items-center justify-end gap-x-6">
 													<button
 														onClick={() => {
@@ -560,7 +551,9 @@ export const ReaderJobModal = ({
 																<p className="text-gray-700">
 																	Approximate
 																	Price: ${" "}
-																	{calculatePrice()}
+																	{calculatePrice(
+																		wordCount
+																	)}
 																</p>
 															</div>
 														</div>
@@ -591,8 +584,8 @@ export const ReaderJobModal = ({
 										</div>
 
 										{currentJob &&
-											getPastReadJobDetails(currentJob)
-												?.type !== "completed" && (
+											getJobDetails(currentJob)
+												?.status !== "completed" && (
 												<div className="mt-6 flex items-center justify-end gap-x-6">
 													<button
 														onClick={() => {

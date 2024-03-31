@@ -1,9 +1,15 @@
-import { PencilSquareIcon } from "@heroicons/react/20/solid";
+import {
+	EllipsisVerticalIcon,
+	PencilSquareIcon,
+} from "@heroicons/react/20/solid";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { NavLink } from "react-router-dom";
 import { ReaderJobModal } from "../components/ReaderJobModal";
-import { matches, pastReads } from "../constants";
+import { readerData } from "../constants";
+import { Menu, Transition } from "@headlessui/react";
+import { calculatePrice } from "../utils";
+import { News } from "./Writer";
 
 function classNames(...classes: string[]): string {
 	return classes.filter(Boolean).join(" ");
@@ -61,85 +67,117 @@ export default function Example(): JSX.Element {
 				</div>
 			</header>
 
-			<div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
-				<div className="mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
-					{/* Invoice summary */}
-					{/* <div className="lg:col-start-3 lg:row-end-1">
-							<h2 className="sr-only">Summary</h2>
-							<div className="rounded-lg bg-gray-50 shadow-sm ring-1 ring-gray-900/5">
-								<dl className="flex flex-wrap">
-									<div className="flex-auto pl-6 pt-6">
-										<dt className="text-sm font-semibold leading-6 text-gray-900">
-											Amount
-										</dt>
-										<dd className="mt-1 text-base font-semibold leading-6 text-gray-900">
-											$10,560.00
-										</dd>
-									</div>
-									<div className="flex-none self-end px-6 pt-4">
-										<dt className="sr-only">Status</dt>
-										<dd className="rounded-md bg-green-50 px-2 py-1 text-xs font-medium text-green-600 ring-1 ring-inset ring-green-600/20">
-											Paid
-										</dd>
-									</div>
-									<div className="mt-6 flex w-full flex-none gap-x-4 border-t border-gray-900/5 px-6 pt-6">
-										<dt className="flex-none">
-											<span className="sr-only">
-												Client
-											</span>
-											<UserCircleIcon
-												className="h-6 w-5 text-gray-400"
-												aria-hidden="true"
-											/>
-										</dt>
-										<dd className="text-sm font-medium leading-6 text-gray-900">
-											Alex Curren
-										</dd>
-									</div>
-									<div className="mt-4 flex w-full flex-none gap-x-4 px-6">
-										<dt className="flex-none">
-											<span className="sr-only">
-												Due date
-											</span>
-											<CalendarDaysIcon
-												className="h-6 w-5 text-gray-400"
-												aria-hidden="true"
-											/>
-										</dt>
-										<dd className="text-sm leading-6 text-gray-500">
-											<time dateTime="2023-01-31">
-												January 31, 2023
-											</time>
-										</dd>
-									</div>
-									<div className="mt-4 flex w-full flex-none gap-x-4 px-6">
-										<dt className="flex-none">
-											<span className="sr-only">
-												Status
-											</span>
-											<CreditCardIcon
-												className="h-6 w-5 text-gray-400"
-												aria-hidden="true"
-											/>
-										</dt>
-										<dd className="text-sm leading-6 text-gray-500">
-											Paid with MasterCard
-										</dd>
-									</div>
-								</dl>
-								<div className="mt-6 border-t border-gray-900/5 px-6 py-6">
-									<a
-										href="#"
-										className="text-sm font-semibold leading-6 text-gray-900"
+			<div className="mx-auto max-w-7xl">
+				<div className="mt-6 mb-6 px-8">
+					<h2 className="text-sm font-medium text-gray-900">
+						Projects In-Progress
+					</h2>
+					<ul
+						role="list"
+						className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4"
+					>
+						{readerData
+							.filter((match) => match.status === "in-progress")
+							.map((project) => (
+								<li
+									key={project.id}
+									className="relative col-span-1 flex rounded-md shadow-sm"
+								>
+									<div
+										className={classNames(
+											"bg-teal-600",
+											"flex w-16 flex-shrink-0 items-center justify-center rounded-l-md text-sm font-medium text-white"
+										)}
 									>
-										Download receipt{" "}
-										<span aria-hidden="true">&rarr;</span>
-									</a>
-								</div>
-							</div>
-						</div> */}
-
-					{/* Invoice */}
+										{project.initials}
+									</div>
+									<div className="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
+										<div className="flex-1 truncate px-4 py-2 text-sm h-12">
+											<span
+												onClick={() => {
+													setCurrentJob(
+														project.title
+													);
+													setJobModalIsOpen(true);
+												}}
+												className="font-medium text-gray-900 hover:text-gray-600 cursor-pointer"
+											>
+												{project.title}
+											</span>
+										</div>
+										<Menu
+											as="div"
+											className="flex-shrink-0 pr-2"
+										>
+											<Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
+												<span className="sr-only">
+													Open options
+												</span>
+												<EllipsisVerticalIcon
+													className="h-5 w-5"
+													aria-hidden="true"
+												/>
+											</Menu.Button>
+											<Transition
+												as={Fragment}
+												enter="transition ease-out duration-100"
+												enterFrom="transform opacity-0 scale-95"
+												enterTo="transform opacity-100 scale-100"
+												leave="transition ease-in duration-75"
+												leaveFrom="transform opacity-100 scale-100"
+												leaveTo="transform opacity-0 scale-95"
+											>
+												<Menu.Items className="absolute right-10 top-3 z-10 mx-3 mt-1 w-48 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+													<div className="py-1">
+														<Menu.Item>
+															{({ active }) => (
+																<span
+																	onClick={() => {
+																		setCurrentJob(
+																			project.title
+																		);
+																		setJobModalIsOpen(
+																			true
+																		);
+																	}}
+																	className={classNames(
+																		active
+																			? "bg-gray-100 text-gray-900"
+																			: "text-gray-700",
+																		"block px-4 py-2 text-sm cursor-pointer"
+																	)}
+																>
+																	View
+																</span>
+															)}
+														</Menu.Item>
+													</div>
+													<div className="py-1">
+														<Menu.Item>
+															{({ active }) => (
+																<a
+																	href="#"
+																	className={classNames(
+																		active
+																			? "bg-gray-100 text-gray-900"
+																			: "text-gray-700",
+																		"block px-4 py-2 text-sm"
+																	)}
+																>
+																	Share
+																</a>
+															)}
+														</Menu.Item>
+													</div>
+												</Menu.Items>
+											</Transition>
+										</Menu>
+									</div>
+								</li>
+							))}
+					</ul>
+				</div>
+				<div className="mx-auto grid max-w-2xl grid-cols-1 grid-rows-1 items-start gap-x-8 gap-y-8 lg:mx-0 lg:max-w-none lg:grid-cols-3">
 					<div className="shadow-sm ring-1 ring-gray-900/5 sm:rounded-lg lg:col-span-2 lg:row-span-2 lg:row-end-2">
 						<div className="sm:mx-0 px-4 py-8 pb-0 sm:px-8 sm:pb-14 xl:px-12 xl:pb-4 xl:pt-8">
 							<table className="w-full whitespace-nowrap text-left text-sm leading-6">
@@ -149,7 +187,7 @@ export default function Example(): JSX.Element {
 											scope="col"
 											className="px-0 py-3 font-bold text-lg w-full"
 										>
-											Matches
+											Projects You Might Like
 										</th>
 										<th
 											scope="col"
@@ -160,38 +198,45 @@ export default function Example(): JSX.Element {
 									</tr>
 								</thead>
 								<tbody>
-									{matches.map((item) => (
-										<tr
-											onClick={() => {
-												setCurrentJob(item.title);
-												setJobModalIsOpen(true);
-											}}
-											key={item.id}
-											className="border-b border-gray-100 cursor-pointer"
-										>
-											<td className="max-w-0 px-0 py-5 align-top">
-												<div className="truncate font-semibold text-md text-teal-700">
-													{item.title}
-													<span className="text-sm text-gray-600">
-														{item.author
-															? ` by ${item.author}`
-															: ""}
-													</span>
-												</div>
-												<div className=" whitespace-break-spaces text-gray-500">
-													{item.description}
-												</div>
-											</td>
+									{readerData
+										.filter(
+											(item) =>
+												item.status === "suggested"
+										)
+										.map((item) => (
+											<tr
+												onClick={() => {
+													setCurrentJob(item.title);
+													setJobModalIsOpen(true);
+												}}
+												key={item.id}
+												className="border-b border-gray-100 cursor-pointer"
+											>
+												<td className="max-w-0 px-0 py-5 align-top">
+													<div className="truncate font-semibold text-md text-teal-700">
+														{item.title}
+														<span className="text-sm text-gray-600">
+															{item.author
+																? ` by ${item.author}`
+																: ""}
+														</span>
+													</div>
+													<div className=" whitespace-break-spaces text-gray-500">
+														{item.description}
+													</div>
+												</td>
 
-											<td className="py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700">
-												{item.price}
-											</td>
-										</tr>
-									))}
+												<td className="py-5 pl-8 pr-0 text-right align-top tabular-nums text-gray-700">
+													$
+													{calculatePrice(
+														item.wordCount
+													)}
+												</td>
+											</tr>
+										))}
 								</tbody>
 							</table>
 						</div>
-						<Updates />
 					</div>
 
 					<div className="lg:col-start-3">
@@ -200,98 +245,102 @@ export default function Example(): JSX.Element {
 							Past Reads
 						</h2>
 						<ul role="list" className="mt-6 space-y-6">
-							{pastReads.map((activityItem, activityItemIdx) => (
-								<li
-									onClick={() => {
-										setCurrentJob(
-											activityItem.readJob.name
-										);
-										setJobModalIsOpen(true);
-									}}
-									key={activityItem.id}
-									className="relative flex gap-x-4 cursor-pointer"
-								>
-									<div
-										className={classNames(
-											activityItemIdx ===
-												pastReads.length - 1
-												? "h-6"
-												: "-bottom-6",
-											"absolute left-0 top-0 flex w-6 justify-center"
-										)}
+							{readerData
+								.filter((item) => item.status === "completed")
+								.map((activityItem, activityItemIdx) => (
+									<li
+										onClick={() => {
+											setCurrentJob(activityItem.title);
+											setJobModalIsOpen(true);
+										}}
+										key={activityItem.id}
+										className="relative flex gap-x-4 cursor-pointer"
 									>
-										<div className="w-px bg-gray-200" />
-									</div>
-									{activityItem.type === "commented" ? (
-										<>
-											<img
-												src={
-													activityItem.readJob
-														.imageUrl
-												}
-												alt=""
-												className="relative mt-3 h-6 w-6 flex-none rounded-full bg-gray-50"
-											/>
-											<div className="flex-auto rounded-md p-3 ring-1 ring-inset ring-gray-200">
-												<div className="flex justify-between gap-x-4">
-													<div className="py-0.5 text-xs leading-5 text-gray-500">
-														<span className="font-medium text-gray-900">
-															{
-																activityItem
-																	.readJob
-																	.name
+										<div
+											className={classNames(
+												activityItemIdx ===
+													readerData.filter(
+														(item) =>
+															item.status ===
+															"completed"
+													).length -
+														1
+													? "h-6"
+													: "-bottom-6",
+												"absolute left-0 top-0 flex w-6 justify-center"
+											)}
+										>
+											<div className="w-px bg-gray-200" />
+										</div>
+										{activityItem.comment ? (
+											<>
+												<img
+													src={activityItem.imageUrl}
+													alt=""
+													className="relative mt-3 h-6 w-6 flex-none rounded-full bg-gray-50"
+												/>
+												<div className="flex-auto rounded-md p-3 ring-1 ring-inset ring-gray-200">
+													<div className="flex justify-between gap-x-4">
+														<div className="py-0.5 text-xs leading-5 text-gray-500">
+															<span className="font-medium text-gray-900">
+																{
+																	activityItem.title
+																}
+															</span>
+															{"'s"} author
+															commented
+														</div>
+														<time
+															dateTime={
+																activityItem.date
 															}
-														</span>
-														{"'s"} author commented
+															className="flex-none py-0.5 text-xs leading-5 text-gray-500"
+														>
+															{activityItem.date}
+														</time>
 													</div>
-													<time
-														dateTime={
-															activityItem.dateTime
-														}
-														className="flex-none py-0.5 text-xs leading-5 text-gray-500"
-													>
-														{activityItem.date}
-													</time>
+													<p className="text-sm leading-6 text-gray-500">
+														{activityItem.comment}
+													</p>
 												</div>
-												<p className="text-sm leading-6 text-gray-500">
-													{activityItem.comment}
+											</>
+										) : (
+											<>
+												<div className="relative flex h-6 w-6 flex-none items-center justify-center bg-white">
+													{activityItem.status ===
+													"completed" ? (
+														<CheckCircleIcon
+															className="h-6 w-6 text-teal-600"
+															aria-hidden="true"
+														/>
+													) : (
+														<div className="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300" />
+													)}
+												</div>
+												<p className="flex-auto py-0.5 text-xs leading-5 text-gray-500">
+													You completed{" "}
+													<span className="font-medium text-gray-900">
+														{activityItem.title}
+													</span>
+													{"'s "}
+													reader job.
 												</p>
-											</div>
-										</>
-									) : (
-										<>
-											<div className="relative flex h-6 w-6 flex-none items-center justify-center bg-white">
-												{activityItem.type ===
-												"completed" ? (
-													<CheckCircleIcon
-														className="h-6 w-6 text-teal-600"
-														aria-hidden="true"
-													/>
-												) : (
-													<div className="h-1.5 w-1.5 rounded-full bg-gray-100 ring-1 ring-gray-300" />
-												)}
-											</div>
-											<p className="flex-auto py-0.5 text-xs leading-5 text-gray-500">
-												You {activityItem.type}{" "}
-												<span className="font-medium text-gray-900">
-													{activityItem.readJob.name}
-												</span>
-												{"'s "}
-												reader job.
-											</p>
-											<time
-												dateTime={activityItem.dateTime}
-												className="flex-none py-0.5 text-xs leading-5 text-gray-500"
-											>
-												{activityItem.date}
-											</time>
-										</>
-									)}
-								</li>
-							))}
+												<time
+													dateTime={activityItem.date}
+													className="flex-none py-0.5 text-xs leading-5 text-gray-500"
+												>
+													{activityItem.date}
+												</time>
+											</>
+										)}
+									</li>
+								))}
 						</ul>
 					</div>
 				</div>
+			</div>
+			<div className="mx-auto max-w-7xl lg:p-0 mg:p-0 xl:p-0 p-4 md:pb-16 lg:pb-16 xl:pb-16 rounded-lg">
+				<News />
 			</div>
 			{jobModaIsOpen && (
 				<ReaderJobModal
@@ -301,69 +350,5 @@ export default function Example(): JSX.Element {
 				/>
 			)}
 		</main>
-	);
-}
-
-export function Updates(): JSX.Element {
-	return (
-		<div className="relative rounded-lg m-4 sm:m-4 bg-gray-900">
-			<div className="relative lg:h-full rounded-lg overflow-hidden bg-teal-600 md:absolute md:left-0 md:h-full md:w-1/4 lg:w-1/2">
-				<img
-					className="h-full w-full object-cover"
-					// src="https://images.unsplash.com/photo-1525130413817-d45c1d127c42?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1920&q=60&blend=6366F1&sat=-100&blend-mode=multiply"
-					src="https://images.unsplash.com/photo-1550399105-c4db5fb85c18?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1471&q=80"
-					alt=""
-				/>
-				<svg
-					viewBox="0 0 926 676"
-					aria-hidden="true"
-					className="absolute -bottom-24 left-24 w-[57.875rem] transform-gpu blur-[118px]"
-				>
-					<path
-						fill="url(#60c3c621-93e0-4a09-a0e6-4c228a0116d8)"
-						fillOpacity=".4"
-						d="m254.325 516.708-90.89 158.331L0 436.427l254.325 80.281 163.691-285.15c1.048 131.759 36.144 345.144 168.149 144.613C751.171 125.508 707.17-93.823 826.603 41.15c95.546 107.978 104.766 294.048 97.432 373.585L685.481 297.694l16.974 360.474-448.13-141.46Z"
-					/>
-					<defs>
-						<linearGradient
-							id="60c3c621-93e0-4a09-a0e6-4c228a0116d8"
-							x1="926.392"
-							x2="-109.635"
-							y1=".176"
-							y2="321.024"
-							gradientUnits="userSpaceOnUse"
-						>
-							<stop stopColor="#776FFF" />
-							<stop offset={1} stopColor="#FF4694" />
-						</linearGradient>
-					</defs>
-				</svg>
-			</div>
-			<div className="relative mx-auto w-full py-8 sm:py-16 lg:px-8">
-				<div className="pl-6 pr-6 md:ml-auto md:w-2/3 md:pl-16 lg:w-2/3 lg:pl-24 lg:pr-0 xl:pl-40 ">
-					<h2 className="text-base font-semibold leading-7 text-teal-400">
-						News / Updates
-					</h2>
-					<p className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">
-						A Special Thanks to Our Supporters
-					</p>
-					<p className="mt-6 text-base leading-7 text-gray-300">
-						As we unveil Muchbeta in its soft launch phase, we
-						extend our heartfelt gratitude to you, our pioneering
-						supporters. Your belief in our vision has brought us to
-						this pivotal moment, and we're thrilled to grant you
-						exclusive early access to the platform.
-					</p>
-					{/* <div className="mt-8">
-						<a
-							href="#"
-							className="inline-flex rounded-md bg-white/10 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-white/20 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
-						>
-							Visit the help center
-						</a>
-					</div> */}
-				</div>
-			</div>
-		</div>
 	);
 }

@@ -118,7 +118,7 @@ export default function Example(): JSX.Element {
 								>
 									<div
 										className={classNames(
-											project.bgColorClass,
+											"bg-teal-600",
 											"flex w-16 flex-shrink-0 items-center justify-center rounded-l-md text-sm font-medium text-white"
 										)}
 									>
@@ -234,7 +234,7 @@ export default function Example(): JSX.Element {
 										<span className="flex items-center space-x-3 truncate">
 											<span
 												className={classNames(
-													project.bgColorClass,
+													"bg-teal-600",
 													"h-2.5 w-2.5 flex-shrink-0 rounded-full"
 												)}
 												aria-hidden="true"
@@ -299,7 +299,7 @@ export default function Example(): JSX.Element {
 												<div className="flex items-center space-x-3 lg:pl-2">
 													<div
 														className={classNames(
-															project.bgColorClass,
+															"bg-teal-600",
 															"h-2.5 w-2.5 flex-shrink-0 rounded-full"
 														)}
 														aria-hidden="true"
