@@ -26,18 +26,18 @@ const stats = [
 		changeType: "increase",
 	},
 	{
-		name: "Total Completed Projects",
-		stat: "71",
-		previousStat: "70",
-		change: "1.4%",
-		changeType: "increase",
+		name: "Missed deadline tally",
+		stat: "2",
+		previousStat: "3",
+		change: "33%",
+		changeType: "decrease",
 	},
 	{
-		name: "Avg. Project Open Rate",
-		stat: "58.16%",
-		previousStat: "56.14%",
-		change: "2.02%",
-		changeType: "increase",
+		name: "Misconduct reports",
+		stat: "0",
+		previousStat: "1",
+		change: "100%",
+		changeType: "decrease",
 	},
 ];
 
