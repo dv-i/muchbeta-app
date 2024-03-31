@@ -108,24 +108,23 @@ export function SponsorAD(): JSX.Element {
 					<div className="lg:grid lg:grid-cols-12 lg:gap-8">
 						<div className="sm:text-center md:mx-auto md:max-w-2xl lg:col-span-6 lg:text-left">
 							<h1>
-								<span className="block text-base font-semibold text-gray-500 sm:text-lg lg:text-base xl:text-lg">
+								{/* <span className="block text-base font-semibold text-gray-500 sm:text-lg lg:text-base xl:text-lg">
 									Sponsor Advertisement
-								</span>
+								</span> */}
 								<span className="mt-1 block text-4xl font-bold tracking-tight sm:text-5xl xl:text-6xl">
 									<span className="block text-gray-900">
-										Discover More with
+										Showcase your brand with
 										<span className="inline text-teal-600">
 											{" "}
-											Sponsor
+											Muchbeta
 										</span>
 									</span>
 								</span>
 							</h1>
 							<p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-								Showcase your brand with Muchbeta. Our platform
-								offers a unique opportunity for your business to
-								connect with an engaged, literary-minded
-								audience.
+								Our platform offers a unique opportunity for
+								your business to connect with an engaged,
+								literary-minded audience.
 							</p>
 						</div>
 						<div className="relative mt-12 sm:mx-auto sm:max-w-lg lg:col-span-6 lg:mx-0 lg:mt-0 lg:flex lg:max-w-none lg:items-center">
@@ -220,7 +219,7 @@ export function PromotionSection(): JSX.Element {
 					<h1 className="text-center py-6 text-3xl font-bold tracking-tight text-white sm:text-4xl">
 						Authors Promotion
 						<p className="mt-3 text-base text-white sm:mt-5 sm:text-xl lg:text-lg xl:text-3xl">
-							Your Title Here!
+							The Coldest Sunset
 						</p>
 						<p className="font-normal max-w-xl mx-auto text-base text-white sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
 							Showcase your finished projects that have been honed
@@ -236,7 +235,7 @@ export function PromotionSection(): JSX.Element {
 							>
 								<ReactCardCarousel
 									autoplay={true}
-									autoplay_speed={2500}
+									autoplay_speed={10000}
 								>
 									<CarouselCard index={1} />
 									<CarouselCard index={2} />
@@ -283,8 +282,8 @@ export function CarouselCard({ index }: { index: number }): JSX.Element {
 			<div className="px-6 py-4">
 				<div className="font-bold text-xl mb-2">The Coldest Sunset</div>
 				<p className="text-gray-700 text-base">
-					Experience the Ultimate Summer Bliss with Unbeatable Deals
-					on Product!
+					Showcase your finished projects that have been honed by the
+					Muchbeta community and connect directly with your audience.
 				</p>
 			</div>
 			<div className="px-6 pt-4 pb-2 hidden">
@@ -381,12 +380,12 @@ export function Poll(): JSX.Element {
 							<>
 								<span className="flex items-center">
 									<span className="flex flex-col text-sm">
-										<RadioGroup.Label
+										{/* <RadioGroup.Label
 											as="span"
 											className="font-medium text-gray-900"
 										>
 											{plan.heading}
-										</RadioGroup.Label>
+										</RadioGroup.Label> */}
 										<RadioGroup.Description
 											as="span"
 											className="text-gray-500"
