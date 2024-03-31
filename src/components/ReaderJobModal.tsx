@@ -563,6 +563,23 @@ export const ReaderJobModal = ({
 															htmlFor="username"
 															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
 														>
+															Time required to
+															complete
+														</label>
+														<div className="mt-2 sm:col-span-2 sm:mt-0">
+															<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md"></div>
+															<div className="mb-4 pt-2">
+																<p className="text-gray-700">
+																	5 hours
+																</p>
+															</div>
+														</div>
+													</div>
+													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+														<label
+															htmlFor="username"
+															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+														>
 															Exclude this writer?
 														</label>
 														<div className="mt-2 sm:col-span-2 sm:mt-0">

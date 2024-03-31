@@ -1,6 +1,6 @@
 import { Transition, Dialog } from "@headlessui/react";
 import { BookOpenIcon, StarIcon } from "@heroicons/react/20/solid";
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { PRICE_PER_WORD, projects } from "../constants";
 import type { Project } from "../interfaces";
 import Select from "react-tailwindcss-select";
@@ -194,6 +194,8 @@ export const WriterProjectModal = ({
 			: []
 	);
 
+	const [totalPrice, setTotalPrice] = useState(0);
+
 	const [demographicsSelection, setDemographicsSelection] = useState<
 		Option | Option[]
 	>(
@@ -223,10 +225,15 @@ export const WriterProjectModal = ({
 	};
 
 	const calculatePrice = (): number => {
-		return Math.ceil(
-			wordCount && wordCount > 0 ? wordCount * PRICE_PER_WORD : 0
+		const price = Math.ceil(
+			wordCount * PRICE_PER_WORD * (1 + numberOfBetaReaders * 0.1)
 		);
+		return !isNaN(price) ? price : 0;
 	};
+
+	useEffect(() => {
+		setTotalPrice(calculatePrice());
+	}, [numberOfBetaReaders, wordCount]);
 
 	const renderRegularFields = (): JSX.Element => {
 		return (
@@ -515,7 +522,7 @@ export const WriterProjectModal = ({
 							</div>
 							<div className="mb-4 pt-2">
 								<p className="text-gray-700">
-									Approximate Price: $ {calculatePrice()}
+									Approximate Price: $ {totalPrice}
 								</p>
 							</div>
 						</div>
@@ -556,6 +563,19 @@ export const WriterProjectModal = ({
 							htmlFor="username"
 							className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
 						>
+							Total project price
+						</label>
+						<div className="mt-2 sm:col-span-2 sm:mt-0">
+							<div className="mb-4 pt-2">
+								<p className="text-gray-700">$ {totalPrice}</p>
+							</div>
+						</div>
+					</div>
+					<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+						<label
+							htmlFor="username"
+							className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+						>
 							Select or type in your own question for Beta Readers
 						</label>
 						<div className="mt-2 sm:col-span-2 sm:mt-0">
@@ -583,10 +603,80 @@ export const WriterProjectModal = ({
 							</div>
 						</div>
 					</div>
+					<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+						<label
+							htmlFor="username"
+							className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+						>
+							Select Beta Reader type
+						</label>
+						<div className="mt-2 sm:col-span-2 sm:mt-0">
+							<div className="space-y-5">
+								<div className="relative flex items-start">
+									<div className="flex h-6 items-center">
+										<input
+											disabled={
+												currentProject !== undefined
+											}
+											id="comments"
+											aria-describedby="comments-description"
+											name="comments"
+											type="checkbox"
+											className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+										/>
+									</div>
+									<div className="ml-3 text-sm leading-6">
+										<label
+											htmlFor="comments"
+											className="font-medium text-gray-900"
+										>
+											Free
+										</label>
+										<p
+											id="comments-description"
+											className="text-gray-500"
+										>
+											All Beta Readers will be able to
+											accept this project.
+										</p>
+									</div>
+								</div>
+								<div className="relative flex items-start">
+									<div className="flex h-6 items-center">
+										<input
+											disabled={
+												currentProject !== undefined
+											}
+											id="candidates"
+											aria-describedby="candidates-description"
+											name="candidates"
+											type="checkbox"
+											className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-600"
+										/>
+									</div>
+									<div className="ml-3 text-sm leading-6">
+										<label
+											htmlFor="candidates"
+											className="font-medium text-gray-900"
+										>
+											Paid
+										</label>
+										<p
+											id="candidates-description"
+											className="text-gray-500"
+										>
+											Only Beta Readers with a rating of 4
+											or more will be able to accept this
+											project.
+										</p>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 					{currentProject &&
 						!currentFeedback &&
 						renderReaderFeedback()}
-					{/* INSERT hERE */}
 				</div>
 			</>
 		);
@@ -721,6 +811,18 @@ export const WriterProjectModal = ({
 												className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
 											>
 												Submit
+											</button>
+										</div>
+									)}
+									{currentProject && (
+										<div className="flex items-center justify-end gap-x-6">
+											<button
+												onClick={() => {
+													setIsOpen(false);
+												}}
+												className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+											>
+												Complete/close
 											</button>
 										</div>
 									)}

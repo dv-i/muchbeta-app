@@ -6,6 +6,8 @@ import {
 	type Option,
 	type SelectValue,
 } from "react-tailwindcss-select/dist/components/type";
+import { classNames } from "../utils";
+import { ArrowUpIcon, ArrowDownIcon } from "@heroicons/react/20/solid";
 
 const secondaryNavigation = [
 	{ name: "Account", href: "#", current: true },
@@ -13,6 +15,30 @@ const secondaryNavigation = [
 	{ name: "Billing", href: "#", current: false },
 	{ name: "Teams", href: "#", current: false },
 	{ name: "Integrations", href: "#", current: false },
+];
+
+const stats = [
+	{
+		name: "Average rating",
+		stat: "4.5",
+		previousStat: "4.1",
+		change: "9.7%",
+		changeType: "increase",
+	},
+	{
+		name: "Total Completed Projects",
+		stat: "71",
+		previousStat: "70",
+		change: "1.4%",
+		changeType: "increase",
+	},
+	{
+		name: "Avg. Project Open Rate",
+		stat: "58.16%",
+		previousStat: "56.14%",
+		change: "2.02%",
+		changeType: "increase",
+	},
 ];
 
 export default function Example(): JSX.Element {
@@ -59,8 +85,77 @@ export default function Example(): JSX.Element {
 
 			{/* Settings forms */}
 			<div className="divide-y divide-white/5">
+				{/* Stats */}
+				<div className="grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+					<div>
+						<h2 className="text-base font-semibold leading-7 text-gray-700">
+							Your stats
+						</h2>
+						<p className="mt-1 text-sm leading-6 text-gray-500">
+							Your average rating is visible to everyone, but the
+							rest of your statistics are confidential and can
+							only be accessed by you.
+						</p>
+					</div>
+					<div>
+						<h3 className="text-base font-semibold leading-6 text-gray-900">
+							Last 30 days
+						</h3>
+						<dl className="mt-5 grid grid-cols-1 divide-y divide-gray-200 overflow-hidden rounded-lg bg-white shadow md:grid-cols-1 md:divide-x md:divide-y-0">
+							{stats.map((item) => (
+								<div
+									key={item.name}
+									className="px-4 py-5 sm:p-6"
+								>
+									<dt className="text-base font-normal text-gray-900">
+										{item.name}
+									</dt>
+									<dd className="mt-1 flex items-baseline justify-between md:block lg:flex">
+										<div className="flex items-baseline text-2xl font-semibold text-indigo-600">
+											{item.stat}
+											<span className="ml-2 text-sm font-medium text-gray-500">
+												from {item.previousStat}
+											</span>
+										</div>
+
+										<div
+											className={classNames(
+												item.changeType === "increase"
+													? "bg-green-100 text-green-800"
+													: "bg-red-100 text-red-800",
+												"inline-flex items-baseline rounded-full px-2.5 py-0.5 text-sm font-medium md:mt-2 lg:mt-0"
+											)}
+										>
+											{item.changeType === "increase" ? (
+												<ArrowUpIcon
+													className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-green-500"
+													aria-hidden="true"
+												/>
+											) : (
+												<ArrowDownIcon
+													className="-ml-1 mr-0.5 h-5 w-5 flex-shrink-0 self-center text-red-500"
+													aria-hidden="true"
+												/>
+											)}
+
+											<span className="sr-only">
+												{" "}
+												{item.changeType === "increase"
+													? "Increased"
+													: "Decreased"}{" "}
+												by{" "}
+											</span>
+											{item.change}
+										</div>
+									</dd>
+								</div>
+							))}
+						</dl>
+					</div>
+				</div>
+
 				{/* Basic Information */}
-				<div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+				<div className="grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
 					<div>
 						<h2 className="text-base font-semibold leading-7 text-gray-700">
 							Personal Information
@@ -220,7 +315,7 @@ export default function Example(): JSX.Element {
 				</div>
 
 				{/* Preferences */}
-				<div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+				<div className="grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
 					<div>
 						<h2 className="text-base font-semibold leading-7 text-gray-700">
 							Genre Preferences
@@ -324,7 +419,7 @@ export default function Example(): JSX.Element {
 				</div>
 
 				{/* Password */}
-				<div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+				<div className="grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
 					<div>
 						<h2 className="text-base font-semibold leading-7 text-gray-700">
 							Change password
@@ -400,7 +495,7 @@ export default function Example(): JSX.Element {
 				</div>
 
 				{/* Delete your account */}
-				<div className="grid max-w-7xl grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
+				<div className="grid grid-cols-1 gap-x-8 gap-y-10 px-4 py-16 sm:px-6 md:grid-cols-3 lg:px-8">
 					<div>
 						<h2 className="text-base font-semibold leading-7 text-gray-700">
 							Delete account

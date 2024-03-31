@@ -102,7 +102,7 @@ export default function Example(): JSX.Element {
 					{/* Pinned projects */}
 					<div className="mt-6 px-4 sm:px-6 lg:px-8">
 						<h2 className="text-sm font-medium text-gray-900">
-							Current Projects
+							Active Projects
 						</h2>
 						<ul
 							role="list"
