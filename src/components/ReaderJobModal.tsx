@@ -587,7 +587,7 @@ export const ReaderJobModal = ({
 															htmlFor="username"
 															className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
 														>
-															Total project price
+															Calculated price
 														</label>
 														<div className="mt-2 sm:col-span-2 sm:mt-0">
 															<div className="mb-4 pt-2">
