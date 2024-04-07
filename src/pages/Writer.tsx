@@ -212,7 +212,7 @@ export default function Example(): JSX.Element {
 					<div className="mt-10 sm:hidden">
 						<div className="px-4 sm:px-6">
 							<h2 className="text-sm font-medium text-gray-900">
-								Past Projects
+								Paused Projects
 							</h2>
 						</div>
 						<ul
@@ -264,7 +264,7 @@ export default function Example(): JSX.Element {
 											scope="col"
 										>
 											<span className="lg:pl-2">
-												Past Projects
+												Paused projects
 											</span>
 										</th>
 
