@@ -81,12 +81,11 @@ export default function Login(): JSX.Element {
 
 				<p className="mt-10 text-center text-sm text-gray-500">
 					Not a member?{" "}
-					<a
-						href="#"
-						className="font-semibold leading-6 text-teal-600 hover:text-teal-500"
-					>
-						Join us!
-					</a>
+					<NavLink to="/sign-up">
+						<span className="font-semibold leading-6 text-teal-600 hover:text-teal-500">
+							Join us!
+						</span>
+					</NavLink>
 				</p>
 			</div>
 		</div>

@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import Reader from "./pages/Reader";
 import Writer from "./pages/Writer";
 import Navbar from "./components/common/Navbar";
+import SignUp from "./pages/SignUp";
 
 function App(): JSX.Element {
 	return (
@@ -16,6 +17,7 @@ function App(): JSX.Element {
 			<Routes>
 				<Route path="/" index element={<Login />} />
 				<Route path="/home" element={<Home />} />
+				<Route path="/sign-up" element={<SignUp />} />
 				<Route path="/wallet" element={<Wallet />} />
 				<Route path="/profile" element={<Profile />} />
 				<Route path="/reader" element={<Reader />} />
