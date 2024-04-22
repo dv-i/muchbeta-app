@@ -1,6 +1,5 @@
 import { NavLink } from "react-router-dom";
 import Logo from "../assets/logo.png";
-const paymentMethods = [{ id: "credit-card", title: "Credit card" }];
 export default function Example(): JSX.Element {
 	return (
 		<>
