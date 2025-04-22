@@ -745,24 +745,53 @@ export const WriterProjectModal = ({
 										</div>
 									)}
 									{currentProject && (
-										<div className="flex items-center justify-end gap-x-6">
-											<button
-												onClick={() => {
-													setIsOpen(false);
-												}}
-												className="rounded-md bg-amber-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-											>
-												Pause
-											</button>
-											<button
-												onClick={() => {
-													setIsOpen(false);
-												}}
-												className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-											>
-												Complete/close
-											</button>
-										</div>
+										<>
+											{getProjectDetails(currentProject)
+												.status === "in-progress" && (
+												<>
+													<div className="flex items-center justify-end gap-x-6">
+														<button
+															onClick={() => {
+																setIsOpen(
+																	false
+																);
+															}}
+															className="rounded-md bg-amber-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+														>
+															Archive
+														</button>
+														<button
+															onClick={() => {
+																setIsOpen(
+																	false
+																);
+															}}
+															className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+														>
+															Save
+														</button>
+													</div>
+												</>
+											)}
+											{getProjectDetails(currentProject)
+												.status === "paused" && (
+												<>
+													<div className="flex items-center justify-end gap-x-6">
+														<button
+															onClick={() => {
+																setIsOpen(
+																	false
+																);
+															}}
+															className="rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+														>
+															Open for additional
+															readers
+														</button>
+													</div>
+												</>
+											)}
+										</>
 									)}
 								</>
 							</Dialog.Panel>
