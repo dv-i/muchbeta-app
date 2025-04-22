@@ -191,7 +191,7 @@ export default function Example(): JSX.Element {
 										href="#"
 										className="font-medium text-indigo-600 hover:text-indigo-500"
 									>
-										Buy more
+										Post projects to get more
 									</a>
 								</div>
 							</div>

@@ -1,6 +1,6 @@
 import { Transition, Dialog } from "@headlessui/react";
 import React, { Fragment, useState } from "react";
-import { readerData } from "../constants";
+import { demographicOptions, genreOptions, readerData } from "../constants";
 import type { Job } from "../interfaces";
 import Select from "react-tailwindcss-select";
 import {
@@ -32,8 +32,15 @@ export const ReaderJobModal = ({
 
 	const [isFeedbackMode, setIsFeedbackMode] = useState<boolean>(false);
 
+	const [calculatedPrice] = useState(getJobDetails(currentJob).price ?? null);
+
 	const [genrePreferences, setGenrePreferences] = useState<Option | Option[]>(
-		[
+		getJobDetails(currentJob).genres?.map((genre) => {
+			return {
+				label: genre,
+				value: genre,
+			};
+		}) ?? [
 			{
 				value: "comedy",
 				label: "Comedy",
@@ -68,6 +75,8 @@ export const ReaderJobModal = ({
 			label: "Working Professionals",
 		},
 	]);
+
+	const [fullTextRows, setFullTextRows] = useState(10);
 
 	const handleOnAcceptClick = (): void => {
 		setIsFeedbackMode(true);
@@ -321,6 +330,89 @@ export const ReaderJobModal = ({
 															</div>
 														</div>
 													</div>
+													{getJobDetails(currentJob)
+														.status ===
+														"suggested" &&
+														getJobDetails(
+															currentJob
+														).preview && (
+															<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+																<label
+																	htmlFor="username"
+																	className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+																>
+																	Preview
+																</label>
+																<div className="mt-2 sm:col-span-2 sm:mt-0">
+																	<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																		<textarea
+																			rows={
+																				10
+																			}
+																			name="comment"
+																			id="comment"
+																			className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+																			defaultValue={
+																				getJobDetails(
+																					currentJob
+																				)
+																					.preview
+																			}
+																		/>
+																	</div>
+																</div>
+															</div>
+														)}
+
+													{getJobDetails(currentJob)
+														.status ===
+														"in-progress" &&
+														getJobDetails(
+															currentJob
+														).fullText && (
+															<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
+																<label
+																	htmlFor="username"
+																	className="block text-sm font-medium leading-6 text-gray-900 sm:pt-1.5"
+																>
+																	Full text
+																</label>
+																<div className="mt-2 sm:col-span-2 sm:mt-0">
+																	<div className="flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+																		<textarea
+																			rows={
+																				fullTextRows
+																			}
+																			name="comment"
+																			id="comment"
+																			className="block w-full rounded-md border-0 py-1.5 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6"
+																			defaultValue={
+																				getJobDetails(
+																					currentJob
+																				)
+																					.fullText
+																			}
+																		/>
+																	</div>
+																	<span
+																		onClick={() => {
+																			setFullTextRows(
+																				fullTextRows ===
+																					30
+																					? 10
+																					: 30
+																			);
+																		}}
+																		className="cursor-pointer text-sm text-gray-500 underline"
+																	>
+																		{fullTextRows ===
+																		30
+																			? "Collapse"
+																			: "Expand"}
+																	</span>
+																</div>
+															</div>
+														)}
 													<div className="sm:grid sm:grid-cols-3 sm:items-start sm:gap-4 sm:py-6">
 														<label
 															htmlFor="username"
@@ -386,60 +478,9 @@ export const ReaderJobModal = ({
 															<div className="mt-2">
 																<Select
 																	isDisabled
-																	options={[
-																		{
-																			value: "action",
-																			label: "Action",
-																		},
-																		{
-																			value: "adventure",
-																			label: "Adventure",
-																		},
-																		{
-																			value: "comedy",
-																			label: "Comedy",
-																		},
-																		{
-																			value: "drama",
-																			label: "Drama",
-																		},
-																		{
-																			value: "fantasy",
-																			label: "Fantasy",
-																		},
-																		{
-																			value: "horror",
-																			label: "Horror",
-																		},
-																		{
-																			value: "mystery",
-																			label: "Mystery",
-																		},
-																		{
-																			value: "romance",
-																			label: "Romance",
-																		},
-																		{
-																			value: "sci-fi",
-																			label: "Sci-Fi",
-																		},
-																		{
-																			value: "thriller",
-																			label: "Thriller",
-																		},
-																		{
-																			value: "historical-fiction",
-																			label: "Historical Fiction",
-																		},
-																		{
-																			value: "non-fiction",
-																			label: "Non-Fiction",
-																		},
-																		{
-																			value: "poetry",
-																			label: "Poetry",
-																		},
-																	]}
+																	options={
+																		genreOptions
+																	}
 																	value={
 																		genrePreferences ??
 																		null
@@ -472,28 +513,9 @@ export const ReaderJobModal = ({
 															<div className="mt-2">
 																<Select
 																	isDisabled
-																	options={[
-																		{
-																			value: "Young Adults (Ages 16-24)",
-																			label: "Young Adults (Ages 16-24)",
-																		},
-																		{
-																			value: "Working Professionals",
-																			label: "Working Professionals",
-																		},
-																		{
-																			value: "Parents and Caregivers",
-																			label: "Parents and Caregivers",
-																		},
-																		{
-																			value: "Seniors (Ages 65+)",
-																			label: "Seniors (Ages 65+)",
-																		},
-																		{
-																			value: "Science Enthusiasts",
-																			label: "Science Enthusiasts",
-																		},
-																	]}
+																	options={
+																		demographicOptions
+																	}
 																	value={
 																		demographicsSelection ??
 																		null
@@ -593,10 +615,11 @@ export const ReaderJobModal = ({
 															<div className="mb-4 pt-2">
 																<p className="text-gray-700">
 																	${" "}
-																	{calculatePrice(
-																		wordCount,
-																		3
-																	)}
+																	{calculatedPrice ??
+																		calculatePrice(
+																			wordCount,
+																			3
+																		)}
 																</p>
 															</div>
 														</div>

@@ -1,7 +1,7 @@
 import { Transition, Dialog } from "@headlessui/react";
 import { BookOpenIcon, StarIcon } from "@heroicons/react/20/solid";
 import React, { Fragment, useEffect, useState } from "react";
-import { projects } from "../constants";
+import { demographicOptions, genreOptions, projects } from "../constants";
 import type { Project } from "../interfaces";
 import Select from "react-tailwindcss-select";
 import {
@@ -166,7 +166,9 @@ export const WriterProjectModal = ({
 
 	const [genrePreferences, setGenrePreferences] = useState<Option | Option[]>(
 		currentProject
-			? [
+			? getProjectDetails(currentProject).genres?.map((genre) => {
+					return { label: genre, value: genre };
+			  }) ?? [
 					{
 						value: "comedy",
 						label: "Comedy",
@@ -380,60 +382,7 @@ export const WriterProjectModal = ({
 								<Select
 									isDisabled={currentProject !== undefined}
 									isSearchable
-									options={[
-										{
-											value: "action",
-											label: "Action",
-										},
-										{
-											value: "adventure",
-											label: "Adventure",
-										},
-										{
-											value: "comedy",
-											label: "Comedy",
-										},
-										{
-											value: "drama",
-											label: "Drama",
-										},
-										{
-											value: "fantasy",
-											label: "Fantasy",
-										},
-										{
-											value: "horror",
-											label: "Horror",
-										},
-										{
-											value: "mystery",
-											label: "Mystery",
-										},
-										{
-											value: "romance",
-											label: "Romance",
-										},
-										{
-											value: "sci-fi",
-											label: "Sci-Fi",
-										},
-										{
-											value: "thriller",
-											label: "Thriller",
-										},
-										{
-											value: "historical-fiction",
-											label: "Historical Fiction",
-										},
-										{
-											value: "non-fiction",
-											label: "Non-Fiction",
-										},
-										{
-											value: "poetry",
-											label: "Poetry",
-										},
-									]}
+									options={genreOptions}
 									value={genrePreferences ?? null}
 									isMultiple
 									onChange={function (
@@ -458,28 +407,7 @@ export const WriterProjectModal = ({
 								<Select
 									isDisabled={currentProject !== undefined}
 									isSearchable
-									options={[
-										{
-											value: "Young Adults (Ages 16-24)",
-											label: "Young Adults (Ages 16-24)",
-										},
-										{
-											value: "Working Professionals",
-											label: "Working Professionals",
-										},
-										{
-											value: "Parents and Caregivers",
-											label: "Parents and Caregivers",
-										},
-										{
-											value: "Seniors (Ages 65+)",
-											label: "Seniors (Ages 65+)",
-										},
-										{
-											value: "Science Enthusiasts",
-											label: "Science Enthusiasts",
-										},
-									]}
+									options={demographicOptions}
 									value={demographicsSelection ?? null}
 									isMultiple
 									onChange={function (
@@ -818,6 +746,14 @@ export const WriterProjectModal = ({
 									)}
 									{currentProject && (
 										<div className="flex items-center justify-end gap-x-6">
+											<button
+												onClick={() => {
+													setIsOpen(false);
+												}}
+												className="rounded-md bg-amber-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+											>
+												Pause
+											</button>
 											<button
 												onClick={() => {
 													setIsOpen(false);

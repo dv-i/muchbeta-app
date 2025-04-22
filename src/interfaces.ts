@@ -4,11 +4,13 @@ export interface Project {
 	initials: string;
 	description: string;
 	lastUpdated: string;
-	pinned: boolean;
 	bgColorClass: string;
 	wordCount: number;
 	numberOfBetaReaders: number;
 	chapters: string[];
+	genres?: string[];
+	price?: number;
+	status: "in-progress" | "paused";
 }
 
 export interface Job {
@@ -28,4 +30,8 @@ export interface Job {
 		characters: string;
 	};
 	comment: string;
+	genres?: string[];
+	price?: number;
+	preview?: string;
+	fullText?: string;
 }

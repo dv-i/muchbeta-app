@@ -11,9 +11,8 @@ import { projects } from "../constants";
 import { WriterProjectModal } from "../components/WriterProjectModal";
 import { classNames } from "../utils";
 
-const pinnedProjects = projects.filter((project) => project.pinned);
-
 export default function Example(): JSX.Element {
+	const [fetchedProjects] = useState(projects);
 	const [projectModaIsOpen, setProjectModalIsOpen] = useState<boolean>(false);
 	const [currentProject, setCurrentProject] = useState<string | undefined>();
 
@@ -108,103 +107,114 @@ export default function Example(): JSX.Element {
 							role="list"
 							className="mt-3 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 xl:grid-cols-4"
 						>
-							{pinnedProjects.map((project) => (
-								<li
-									key={project.id}
-									className="relative col-span-1 flex rounded-md shadow-sm"
-								>
-									<div
-										className={classNames(
-											"bg-teal-600",
-											"flex w-16 flex-shrink-0 items-center justify-center rounded-l-md text-sm font-medium text-white"
-										)}
+							{fetchedProjects
+								.filter(
+									(project) =>
+										project.status === "in-progress"
+								)
+								.map((project) => (
+									<li
+										key={project.id}
+										className="relative col-span-1 flex rounded-md shadow-sm"
 									>
-										{project.initials}
-									</div>
-									<div className="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
-										<div className="flex-1 truncate px-4 py-2 text-sm h-12">
-											<span
-												onClick={() => {
-													setCurrentProject(
-														project.title
-													);
-													setProjectModalIsOpen(true);
-												}}
-												className="font-medium text-gray-900 hover:text-gray-600 cursor-pointer"
-											>
-												{project.title}
-											</span>
-										</div>
-										<Menu
-											as="div"
-											className="flex-shrink-0 pr-2"
+										<div
+											className={classNames(
+												"bg-teal-600",
+												"flex w-16 flex-shrink-0 items-center justify-center rounded-l-md text-sm font-medium text-white"
+											)}
 										>
-											<Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
-												<span className="sr-only">
-													Open options
+											{project.initials}
+										</div>
+										<div className="flex flex-1 items-center justify-between truncate rounded-r-md border-b border-r border-t border-gray-200 bg-white">
+											<div className="flex-1 truncate px-4 py-2 text-sm h-12">
+												<span
+													onClick={() => {
+														setCurrentProject(
+															project.title
+														);
+														setProjectModalIsOpen(
+															true
+														);
+													}}
+													className="font-medium text-gray-900 hover:text-gray-600 cursor-pointer"
+												>
+													{project.title}
 												</span>
-												<EllipsisVerticalIcon
-													className="h-5 w-5"
-													aria-hidden="true"
-												/>
-											</Menu.Button>
-											<Transition
-												as={Fragment}
-												enter="transition ease-out duration-100"
-												enterFrom="transform opacity-0 scale-95"
-												enterTo="transform opacity-100 scale-100"
-												leave="transition ease-in duration-75"
-												leaveFrom="transform opacity-100 scale-100"
-												leaveTo="transform opacity-0 scale-95"
+											</div>
+											<Menu
+												as="div"
+												className="flex-shrink-0 pr-2"
 											>
-												<Menu.Items className="absolute right-10 top-3 z-10 mx-3 mt-1 w-48 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
-													<div className="py-1">
-														<Menu.Item>
-															{({ active }) => (
-																<span
-																	onClick={() => {
-																		setCurrentProject(
-																			project.title
-																		);
-																		setProjectModalIsOpen(
-																			true
-																		);
-																	}}
-																	className={classNames(
-																		active
-																			? "bg-gray-100 text-gray-900"
-																			: "text-gray-700",
-																		"block px-4 py-2 text-sm cursor-pointer"
-																	)}
-																>
-																	View
-																</span>
-															)}
-														</Menu.Item>
-													</div>
-													<div className="py-1">
-														<Menu.Item>
-															{({ active }) => (
-																<a
-																	href="#"
-																	className={classNames(
-																		active
-																			? "bg-gray-100 text-gray-900"
-																			: "text-gray-700",
-																		"block px-4 py-2 text-sm"
-																	)}
-																>
-																	Share
-																</a>
-															)}
-														</Menu.Item>
-													</div>
-												</Menu.Items>
-											</Transition>
-										</Menu>
-									</div>
-								</li>
-							))}
+												<Menu.Button className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-white text-gray-400 hover:text-gray-500 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-offset-2">
+													<span className="sr-only">
+														Open options
+													</span>
+													<EllipsisVerticalIcon
+														className="h-5 w-5"
+														aria-hidden="true"
+													/>
+												</Menu.Button>
+												<Transition
+													as={Fragment}
+													enter="transition ease-out duration-100"
+													enterFrom="transform opacity-0 scale-95"
+													enterTo="transform opacity-100 scale-100"
+													leave="transition ease-in duration-75"
+													leaveFrom="transform opacity-100 scale-100"
+													leaveTo="transform opacity-0 scale-95"
+												>
+													<Menu.Items className="absolute right-10 top-3 z-10 mx-3 mt-1 w-48 origin-top-right divide-y divide-gray-200 rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+														<div className="py-1">
+															<Menu.Item>
+																{({
+																	active,
+																}) => (
+																	<span
+																		onClick={() => {
+																			setCurrentProject(
+																				project.title
+																			);
+																			setProjectModalIsOpen(
+																				true
+																			);
+																		}}
+																		className={classNames(
+																			active
+																				? "bg-gray-100 text-gray-900"
+																				: "text-gray-700",
+																			"block px-4 py-2 text-sm cursor-pointer"
+																		)}
+																	>
+																		View
+																	</span>
+																)}
+															</Menu.Item>
+														</div>
+														<div className="py-1">
+															<Menu.Item>
+																{({
+																	active,
+																}) => (
+																	<a
+																		href="#"
+																		className={classNames(
+																			active
+																				? "bg-gray-100 text-gray-900"
+																				: "text-gray-700",
+																			"block px-4 py-2 text-sm"
+																		)}
+																	>
+																		Share
+																	</a>
+																)}
+															</Menu.Item>
+														</div>
+													</Menu.Items>
+												</Transition>
+											</Menu>
+										</div>
+									</li>
+								))}
 						</ul>
 					</div>
 
@@ -219,37 +229,43 @@ export default function Example(): JSX.Element {
 							role="list"
 							className="mt-3 divide-y divide-gray-100 border-t border-gray-200"
 						>
-							{projects.map((project) => (
-								<li key={project.id}>
-									<span
-										onClick={() => {
-											setCurrentProject(project.title);
-											setProjectModalIsOpen(true);
-										}}
-										className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6 cursor-pointer"
-									>
-										<span className="flex items-center space-x-3 truncate">
-											<span
-												className={classNames(
-													"bg-teal-600",
-													"h-2.5 w-2.5 flex-shrink-0 rounded-full"
-												)}
-												aria-hidden="true"
-											/>
-											<span className="truncate text-sm font-medium leading-6">
-												{project.title}{" "}
-												<span className="truncate font-normal text-gray-500 text-xs">
-													{project.description}
+							{fetchedProjects
+								.filter(
+									(project) => project.status === "paused"
+								)
+								.map((project) => (
+									<li key={project.id}>
+										<span
+											onClick={() => {
+												setCurrentProject(
+													project.title
+												);
+												setProjectModalIsOpen(true);
+											}}
+											className="group flex items-center justify-between px-4 py-4 hover:bg-gray-50 sm:px-6 cursor-pointer"
+										>
+											<span className="flex items-center space-x-3 truncate">
+												<span
+													className={classNames(
+														"bg-teal-600",
+														"h-2.5 w-2.5 flex-shrink-0 rounded-full"
+													)}
+													aria-hidden="true"
+												/>
+												<span className="truncate text-sm font-medium leading-6">
+													{project.title}{" "}
+													<span className="truncate font-normal text-gray-500 text-xs">
+														{project.description}
+													</span>
 												</span>
 											</span>
+											<ChevronRightIcon
+												className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+												aria-hidden="true"
+											/>
 										</span>
-										<ChevronRightIcon
-											className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-											aria-hidden="true"
-										/>
-									</span>
-								</li>
-							))}
+									</li>
+								))}
 						</ul>
 					</div>
 
@@ -281,50 +297,55 @@ export default function Example(): JSX.Element {
 									</tr>
 								</thead>
 								<tbody className="divide-y divide-gray-100 bg-white">
-									{projects.map((project) => (
-										<tr
-											key={project.id}
-											onClick={() => {
-												setCurrentProject(
-													project.title
-												);
-												setProjectModalIsOpen(true);
-											}}
-											className="cursor-pointer"
-										>
-											<td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
-												<div className="flex items-center space-x-3 lg:pl-2">
-													<div
-														className={classNames(
-															"bg-teal-600",
-															"h-2.5 w-2.5 flex-shrink-0 rounded-full"
-														)}
-														aria-hidden="true"
-													/>
-													<span className="truncate hover:text-gray-600">
-														<span>
-															{project.title}{" "}
-															<span className="font-normal text-gray-500">
-																{" "}
-																{
-																	project.description
-																}
+									{fetchedProjects
+										.filter(
+											(project) =>
+												project.status === "paused"
+										)
+										.map((project) => (
+											<tr
+												key={project.id}
+												onClick={() => {
+													setCurrentProject(
+														project.title
+													);
+													setProjectModalIsOpen(true);
+												}}
+												className="cursor-pointer"
+											>
+												<td className="w-full max-w-0 whitespace-nowrap px-6 py-3 text-sm font-medium text-gray-900">
+													<div className="flex items-center space-x-3 lg:pl-2">
+														<div
+															className={classNames(
+																"bg-teal-600",
+																"h-2.5 w-2.5 flex-shrink-0 rounded-full"
+															)}
+															aria-hidden="true"
+														/>
+														<span className="truncate hover:text-gray-600">
+															<span>
+																{project.title}{" "}
+																<span className="font-normal text-gray-500">
+																	{" "}
+																	{
+																		project.description
+																	}
+																</span>
 															</span>
 														</span>
-													</span>
-												</div>
-											</td>
-											<td className="hidden whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
-												{project.lastUpdated}
-											</td>
-											<td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
-												<ChevronRightIcon
-													className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
-													aria-hidden="true"
-												/>
-											</td>
-										</tr>
-									))}
+													</div>
+												</td>
+												<td className="hidden whitespace-nowrap px-6 py-3 text-right text-sm text-gray-500 md:table-cell">
+													{project.lastUpdated}
+												</td>
+												<td className="whitespace-nowrap px-6 py-3 text-right text-sm font-medium">
+													<ChevronRightIcon
+														className="ml-4 h-5 w-5 text-gray-400 group-hover:text-gray-500"
+														aria-hidden="true"
+													/>
+												</td>
+											</tr>
+										))}
 								</tbody>
 							</table>
 						</div>
